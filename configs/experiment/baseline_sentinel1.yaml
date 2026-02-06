@@ -1,0 +1,12 @@
+experiment_name: baseline_sentinel1_example
+
+interferogram_path: data/processed/sentinel1/example_unwrapped_phase.tif
+coherence_path: null
+unwrapped_phase_path: data/processed/sentinel1/example_unwrapped_phase.tif
+output_dem_path: data/processed/sentinel1/example_baseline_dem.tif
+
+# Geometry parameters (example values; replace with actual acquisition info)
+wavelength_m: 0.055  # Sentinel-1 C-band ~5.5 cm
+incidence_angle_deg: 35.0
+perpendicular_baseline_m: 150.0
+

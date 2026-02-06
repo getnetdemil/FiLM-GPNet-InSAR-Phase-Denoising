@@ -1,0 +1,6 @@
+experiment_name: unet_baseline_sentinel1_example
+
+learning_rate: 1.0e-4
+num_epochs: 1
+output_dir: experiments/enhanced/checkpoints
+

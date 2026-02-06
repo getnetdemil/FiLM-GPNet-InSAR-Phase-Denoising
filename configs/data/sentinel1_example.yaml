@@ -1,0 +1,9 @@
+dataset_name: sentinel1_example
+
+interferogram_path: data/processed/sentinel1/example_interferogram.tif
+coherence_path: data/processed/sentinel1/example_coherence.tif
+reference_dem_path: data/reference/sentinel1/example_reference_dem.tif
+
+tile_size: 256
+stride: 256
+

@@ -1,0 +1,6 @@
+model_name: unet_baseline
+
+in_channels: 2       # interferogram + coherence
+out_channels: 1      # DEM
+features: [32, 64, 128, 256]
+
