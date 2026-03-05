@@ -1,200 +1,160 @@
 Learning-Assisted InSAR DEM Enhancement
-======================================
+========================================
 
-This repository contains a modular research codebase for the work:
+Contest submission for the **[IEEE GRSS 2026 Data Fusion Contest](https://www.grss-ieee.org/community/technical-committees/2026-ieee-grss-data-fusion-contest/)**
+— *deadline: April 06, 2026.*
 
-*“Learning-assisted InSAR DEM Enhancement for High-Resolution, Terrain-Aware Hydrologic Digital Twins”*
+This repository implements a **stack-aware, self-supervised deep learning pipeline** for improving Interferometric SAR (InSAR) products over large, geometry-diverse satellite stacks, with downstream improvements in DEM quality and time-series consistency.
 
-The goal is to build a learning-assisted InSAR framework that improves interferometric phase stability and DEM quality for hydrologic Digital Twin applications, while remaining physically consistent with interferometric observables and scalable across multiple SAR sensors.
+## Overview
 
-## Abstract
+The contest provides a Capella Space X-band SAR dataset: ~1,582 unique collects enabling 17,000+ interferometric pairs across multiple AOIs, with substantial diversity in acquisition mode, incidence angle, look direction, and orbital geometry.
 
-Accurate Digital Elevation Models (DEMs) at high spatial resolution are a critical prerequisite for terrain-aware hydrologic Digital Twins, where topographic errors directly compromise flow routing, inundation mapping, and hazard prediction. Within the scope of hydrologic digitization, improving the reliability of DEMs derived from spaceborne Interferometric Synthetic Aperture Radar (InSAR) remains a key challenge.
+A competitive entry must be **pair-graph-aware** and **geometry-conditioned**. Our approach:
 
-InSAR is a widely used technique for DEM generation, which exploits phase differences and coherence information from two or more SAR acquisitions. While spaceborne InSAR enables large-scale and weather-independent observations, its performance is strongly constrained by sensor geometry, temporal and perpendicular baselines, and surface dynamics. In particular, coherence degradation caused by vegetation cover, soil moisture variability, atmospheric effects, and the presence of wetlands or water bodies leads to noisy interferograms and reduced DEM accuracy in hydrologically relevant environments.
+1. **Pair-graph construction** — build a graph (nodes = collects, edges = candidate pairs), score each edge by a quality formula `Q_ij` using temporal baseline, incidence difference, perpendicular baseline, and SNR proxies, then select a high-value subset for processing.
+2. **Baseline InSAR products** — coregistration (ISCE3 + capella-reader), interferogram formation, coherence estimation, classical filtering (Goldstein, NL-InSAR, BM3D), SNAPHU unwrapping.
+3. **Self-supervised DL enhancement** — a FiLM-conditioned U-Net trained without any ground-truth labels using Noise2Noise (sub-look splits) + closure-consistency + temporal-consistency + fringe-preservation losses. Outputs a denoised complex interferogram and per-pixel uncertainty map.
+4. **Uncertainty-weighted inversion** — predicted uncertainty weights SNAPHU and SBAS stack inversion to improve unwrapping and time-series products.
+5. **Evaluation** — five hard, physics-linked contest metrics computed against classical baselines.
 
-This study investigates a learning-assisted InSAR framework to enhance interferometric data quality and mitigate coherence-related limitations in SAR-derived DEMs. Deep learning based generative and representation-learning models, including diffusion models, generative adversarial networks, and variational autoencoders, are evaluated to support coherence enhancement and artifact suppression in SAR image pairs. The learning components are integrated with established InSAR processing pipelines to improve interferometric phase stability and DEM quality without compromising the physical consistency of the interferometric observables.
+## Contest Metrics
 
-Our methodology leverages daily repeat-track ICEYE and bistatic TerraSAR-X/TanDEM-X satellite acquisitions, with high-resolution reference DEMs from the National Land Survey of Finland enabling robust validation beyond open global DEM products. Initial experiments using Sentinel-1 image pairs show consistent improvements in interferogram quality and spatial coherence patterns relative to baseline InSAR processing, particularly in vegetated and mixed land-cover areas affected by decorrelation. Quantitative aspect of the methodology focuses on improvements in interferogram quality, elevation accuracy, and uncertainty patterns relevant for hydrologic Digital Twin applications. The workflow is designed for scalability across different SAR sensor configurations.
-
-By addressing coherence limitations through the integration of physics-aware deep learning with InSAR pipelines, this work aims to enable more reliable, high-resolution DEM generation for terrain-sensitive hydrologic Digital Twins within the Digital Waters (DIWA) framework.
-
-## Repository overview
-
-This codebase is organized to cleanly separate **data**, **processing pipelines**, **models**, **experiments**, **evaluation**, and **visualization**:
-
-- **`data/`** – inputs and reference products
-  - **`data/raw/`**: Original SAR acquisitions and ancillary inputs (e.g., Sentinel-1, ICEYE, TerraSAR-X/TanDEM-X scenes, orbit files).
-  - **`data/processed/`**: Interferograms, coherence maps, unwrapped phase, and intermediate InSAR products produced by external tools or this codebase.
-  - **`data/reference/`**: High-resolution reference DEMs (e.g., Finnish NLS DEMs) used for validation and training targets.
-  - **`data/metadata/`**: Acquisition parameters (temporal/perpendicular baselines, incidence angles), sensor configuration, AOI definitions, and any auxiliary GIS layers.
-
-- **`src/`** – main Python package
-  - **`src/insar_processing/`** – traditional InSAR processing and data preparation
-    - **`__init__.py`**: Initializes the `insar_processing` subpackage.
-    - **`io.py`**: Low-level I/O helpers for loading and saving rasters (interferograms, coherence maps, DEMs) with `rasterio`, plus resampling utilities for grid alignment.
-    - **`baseline.py`**: Minimal baseline InSAR DEM generation from existing unwrapped phase, using simplified phase-to-height conversion based on acquisition geometry.
-    - **`dataset_preparation.py`**: Sliding-window tiling (`TileConfig`, `sliding_window`) and `prepare_dem_tiles` to create aligned input/target tiles for ML (interferogram + coherence → DEM).
-  - **`src/models/`** – deep learning models for learning-assisted enhancement
-    - **`__init__.py`**: Package initialization.
-    - **`unet_baseline.py`**: Compact U-Net-style CNN (`UNetBaseline`) for DEM refinement given stacked interferogram and coherence channels. Serves as a baseline for more advanced models (GANs, VAEs, diffusion).
-  - **`src/evaluation/`** – quantitative evaluation utilities
-    - **`__init__.py`**: Package initialization.
-    - **`dem_metrics.py`**: DEM quality metrics such as RMSE, MAE, and bias, with optional masks for focusing on hydrologically relevant areas.
-  - **`src/visualization/`** – plotting and figure generation
-    - **`__init__.py`**: Package initialization.
-    - **`plots.py`**: Visualization helpers to compare baseline vs enhanced vs reference DEMs, and to plot error histograms for analysis and publications.
-
-- **`experiments/`** – executable scripts that tie configs, data, and code together
-  - **`experiments/baseline/`**
-    - **`run_baseline.py`**: Command-line entry point for running a baseline InSAR DEM experiment. Reads a YAML configuration, constructs a `BaselineConfig`, calls `run_baseline`, and writes an output DEM raster.
-  - **`experiments/enhanced/`**
-    - **`train_unet.py`**: Command-line training script for the U-Net baseline model. Loads data/model/train configs, prepares DEM tiles, runs a simple training loop, and saves a checkpoint.
-
-- **`configs/`** – YAML configuration files for data, experiments, and models
-  - **`configs/data/`**
-    - **`sentinel1_example.yaml`**: Example configuration pointing to a Sentinel-1 scene (interferogram, coherence, reference DEM) and tiling parameters.
-  - **`configs/experiment/`**
-    - **`baseline_sentinel1.yaml`**: Example baseline InSAR DEM experiment configuration, including unwrapped phase path, output DEM path, and basic geometric parameters (wavelength, incidence, baseline).
-  - **`configs/model/`**
-    - **`unet_baseline.yaml`**: U-Net hyperparameters such as number of input/output channels and feature widths.
-  - **`configs/train/`**
-    - **`default.yaml`**: Training hyperparameters (learning rate, number of epochs, checkpoint directory).
-
-- **`notebooks/`**
-  - Jupyter notebooks for exploratory analysis, quick visual sanity checks, and figure prototyping (e.g., domain overview, data inspection, baseline vs enhanced DEM comparison).
-
-- **`requirements.txt`**
-  - Python dependencies for InSAR processing, geospatial I/O, and deep learning (NumPy, SciPy, rasterio, PyTorch, etc.).
+| Metric | Definition | Target |
+|--------|-----------|--------|
+| Triplet closure error | `median|wrap(φ_ij + φ_jk − φ_ik)|` on stable pixels | ↓ ≥30% |
+| Unwrap success rate | % interferograms with ≥90% connected coverage + closure gate | ↑ ≥15 pp |
+| Percent usable pairs | % edges passing coherence + unwrap + closure gates | ↑ ≥25% |
+| DEM NMAD | `1.4826 × median(|e − median(e)|)`, stable terrain | ↓ ≥15% |
+| Temporal consistency residual | SBAS inversion residual `‖W(Ax − φ̂)‖₂` | ↓ ≥20% |
 
 ## Installation
 
-1. **Create and activate a virtual environment**
+```bash
+conda create -n insar-dem python=3.10
+conda activate insar-dem
 
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate
-   pip install -U pip
-   pip install -r requirements.txt
-   ```
+# PyTorch with CUDA
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 
-2. **Editable install (optional but recommended)**
+# Core dependencies
+pip install -r requirements.txt
+pip install -e .
 
-   From the repository root:
+# Contest-specific packages
+pip install boto3 pystac capella-reader dask geopandas
+conda install -c conda-forge isce3
+```
 
-   ```bash
-   pip install -e .
-   ```
+Verify:
+```bash
+python -c "import torch; print(torch.cuda.is_available())"
+aws s3 ls --no-sign-request s3://capella-open-data/data/
+```
 
-   This lets you import the package as `import src` or configure a proper package name later.
+## Data Access
 
-## Data organization
+Data is on a **public AWS S3 bucket** — no authentication required.
 
-1. **Raw SAR data and ancillary information**
-   - Place sensor-specific SAR acquisitions under subfolders of `data/raw/`, for example:
-     - `data/raw/sentinel1/...`
-     - `data/raw/iceye/...`
-     - `data/raw/tdx/...` (TerraSAR-X/TanDEM-X)
-   - Store orbit files, DEMs used during external processing, and any masks in the same hierarchy or in `data/metadata/`.
+- **S3 bucket**: `s3://capella-open-data/data/` (region: `us-west-2`)
+- **STAC catalog**: `https://capella-open-data.s3.us-west-2.amazonaws.com/stac/catalog.json`
+- **Contest collection**: child link `"IEEE Data Contest 2026"` → `capella-open-data-ieee-data-contest/collection.json`
 
-2. **Processed interferometric products**
-   - Place interferograms, coherence maps, and unwrapped phase outputs in `data/processed/`, organized by sensor or experiment:
-     - `data/processed/sentinel1/example_interferogram.tif`
-     - `data/processed/sentinel1/example_coherence.tif`
-     - `data/processed/sentinel1/example_unwrapped_phase.tif`
+The catalog is a **static STAC** (JSON files, no `/search` endpoint) — use `pystac` directly.
 
-3. **Reference DEMs**
-   - Place high-resolution reference DEMs (e.g., Finnish NLS DEM) in `data/reference/`, ideally mirroring the same AOIs as your interferometric products:
-     - `data/reference/sentinel1/example_reference_dem.tif`
+```bash
+# Crawl catalog, select AOIs, build local manifest, download subset
+python scripts/download_subset.py \
+    --stac_root https://capella-open-data.s3.us-west-2.amazonaws.com/stac/catalog.json \
+    --out_manifest data/manifests/subset_manifest.csv \
+    --out_dir data/raw/
+```
 
-4. **Metadata**
-   - Store acquisition geometry (incidence angle, perpendicular baseline), temporal baselines, and AOI definitions in structured formats (CSV, JSON, or GeoJSON) under `data/metadata/`.
+Data format per collect: COG GeoTIFF (CInt16 complex SLC) + STAC JSON + extended JSON sidecar.
 
-## Baseline InSAR DEM workflow
+## Workflows
 
-The baseline workflow assumes you already have an unwrapped interferometric phase product for a given AOI.
+### 1. Baseline InSAR Pipeline
 
-1. **Configure the baseline experiment**
+```bash
+# Coregistration, interferogram formation, coherence, classical filtering, SNAPHU
+python scripts/preprocess_pairs.py \
+    --manifest data/manifests/subset_manifest.csv \
+    --out_dir data/processed/
 
-   Edit `configs/experiment/baseline_sentinel1.yaml`:
+python scripts/unwrap_snaphu.py \
+    --processed_dir data/processed/ \
+    --coherence_threshold 0.35
 
-   - Set `unwrapped_phase_path` to your unwrapped phase raster.
-   - Optionally set `coherence_path` if you plan to use coherence for masking later.
-   - Set `output_dem_path` to where the baseline DEM should be written.
-   - Update `wavelength_m`, `incidence_angle_deg`, and `perpendicular_baseline_m` with sensor-specific parameters.
+# Simplified phase-to-height DEM (existing scaffold)
+python experiments/baseline/run_baseline.py \
+    --config configs/experiment/baseline_sentinel1.yaml
+```
 
-2. **Run the baseline script**
+### 2. Self-Supervised DL Training
 
-   ```bash
-   python experiments/baseline/run_baseline.py \
-       --config configs/experiment/baseline_sentinel1.yaml
-   ```
+```bash
+python experiments/enhanced/train_film_unet.py \
+    --data_config configs/data/capella_aoi_selection.yaml \
+    --model_config configs/model/film_unet.yaml \
+    --train_config configs/train/contest.yaml
+```
 
-   This will:
+The model (`FiLMUNet`) takes a complex interferogram (2 channels: Re, Im) conditioned on acquisition geometry metadata, and outputs a denoised interferogram + per-pixel log-variance. Training is fully self-supervised via sub-look splits — no clean reference interferograms are required.
 
-   - Load the unwrapped phase raster.
-   - Convert phase to height using a simplified geometry-based model.
-   - Save a DEM raster at `output_dem_path`.
+### 3. Evaluation
 
-3. **Evaluate against a reference DEM**
+```bash
+python eval/compute_metrics.py \
+    --processed_dir data/processed/ \
+    --ref_dem data/reference/ \
+    --out_dir results/
+```
 
-   In a notebook or small script, you can:
+Produces all five contest metrics per AOI and aggregated, plus figures for the paper.
 
-   - Load the baseline DEM and reference DEM with `src.insar_processing.io.load_raster`.
-   - Align grids if necessary (e.g., using the resampling helper in `io.py`).
-   - Compute RMSE, MAE, and bias with `src.evaluation.dem_metrics`.
+## Repository Structure
 
-## Learning-assisted DEM enhancement workflow
+```
+src/
+  insar_processing/
+    io.py                  # Rasterio-based raster I/O (load_raster, save_raster, resample_raster)
+    baseline.py            # BaselineConfig + phase-to-height conversion (run_baseline)
+    dataset_preparation.py # Sliding-window tiling (TileConfig, sliding_window, prepare_dem_tiles)
+    pair_graph.py          # [to build] pair-graph construction + Q_ij edge scoring
+    geometry.py            # [to build] B_perp from ISCE3 orbit geometry
+    filters.py             # [to build] Goldstein, NL-InSAR, BM3D baselines
+    sublook.py             # [to build] sub-look splits for Noise2Noise training
+  models/
+    unet_baseline.py       # Basic U-Net (in_channels=2 → out_channels=1)
+    film_unet.py           # [to build] FiLM-conditioned U-Net for contest submission
+  losses/
+    physics_losses.py      # [to build] N2N, closure, temporal, gradient losses
+  evaluation/
+    dem_metrics.py         # RMSE, MAE, bias
+    closure_metrics.py     # [to build] all 5 contest metrics
+  visualization/
+    plots.py               # DEM comparison + error histogram plots
 
-The learning-assisted pipeline uses interferograms and coherence maps to learn corrections to the DEM (or directly generate improved DEMs), in line with the abstract.
+experiments/
+  baseline/run_baseline.py              # Phase-to-height DEM (existing scaffold)
+  enhanced/train_unet.py               # Basic U-Net training (existing scaffold)
+  enhanced/train_film_unet.py          # [to build] Contest DL training script
 
-1. **Configure data tiling**
+scripts/                               # [to build] Download, preprocess, unwrap
+eval/                                  # [to build] Contest metrics + figures
+configs/
+  data/          # Data paths, AOI selection, tiling parameters
+  experiment/    # InSAR geometry parameters
+  model/         # Model architecture hyperparameters
+  train/         # Learning rate, epochs, checkpoint directory
+notebooks/       # Exploratory analysis and pair-graph visualization
+```
 
-   Edit `configs/data/sentinel1_example.yaml`:
+## Development Plan
 
-   - Set `interferogram_path` to your interferogram raster.
-   - Set `coherence_path` to the corresponding coherence map.
-   - Set `reference_dem_path` to the high-resolution reference DEM.
-   - Adjust `tile_size` and `stride` for your GPU memory and dataset size.
+See [`plan.md`](plan.md) for the week-by-week implementation schedule, detailed phase descriptions, metric definitions, DL loss formulas, ablation study design, and the reproducibility checklist required for contest submission.
 
-2. **Configure the model and training**
+## Reproducibility
 
-   - `configs/model/unet_baseline.yaml`: choose `in_channels`, `out_channels`, and feature depths for `UNetBaseline`.
-   - `configs/train/default.yaml`: set `learning_rate`, `num_epochs`, and `output_dir` for checkpoints.
-
-3. **Run the training script**
-
-   ```bash
-   python experiments/enhanced/train_unet.py \
-       --data_config configs/data/sentinel1_example.yaml \
-       --model_config configs/model/unet_baseline.yaml \
-       --train_config configs/train/default.yaml
-   ```
-
-   This will:
-
-   - Tile the interferogram, coherence, and reference DEM into patches via `prepare_dem_tiles`.
-   - Train a U-Net-style CNN to map input patches to DEM patches.
-   - Save the final model weights to `experiments/enhanced/checkpoints/unet_baseline_final.pt` (by default).
-
-4. **Apply the trained model to full scenes (future extension)**
-
-   A future script (e.g., `experiments/enhanced/apply_unet.py`) can:
-
-   - Load the trained model.
-   - Slide a window over full interferogram/coherence rasters.
-   - Assemble an enhanced DEM raster for evaluation and hydrologic use.
-
-## Visualization and analysis
-
-- Use `src/visualization.plots.plot_dem_comparison` to visually compare:
-  - Baseline DEM vs enhanced DEM vs reference DEM.
-- Use `src/visualization.plots.plot_error_histogram` to inspect error distributions (prediction − reference) and assess bias and spread.
-- Combine these with hydrologic analysis tools (e.g., flow routing from DEMs) to relate DEM improvements to hydrologic Digital Twin performance.
-
-## Roadmap and extensions
-
-- **Model extensions**: Add physics-aware loss terms, conditional GANs, VAEs, and diffusion models as described in the abstract.
-- **Sensor generalization**: Introduce additional data configs for ICEYE and TerraSAR-X/TanDEM-X, ensuring consistent tiling and evaluation.
-- **Hydrologic validation**: Integrate flow accumulation, channel extraction, and inundation metrics to directly quantify benefits for hydrologic Digital Twins.
-
+See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) (to be created) for the STAC root URL, contest collection ID, exact download manifest with checksums, fixed random seeds, and deterministic training settings — all required by the contest.
