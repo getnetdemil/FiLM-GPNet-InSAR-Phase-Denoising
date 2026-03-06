@@ -52,8 +52,19 @@ def find_extended_json(slc_tif_path: str | Path) -> Path:
 # ---------------------------------------------------------------------------
 
 def _parse_iso(ts: str) -> datetime:
-    """Parse ISO-8601 UTC timestamp (with or without trailing Z)."""
-    return datetime.fromisoformat(ts.rstrip("Z")).replace(tzinfo=timezone.utc)
+    """
+    Parse ISO-8601 UTC timestamp (with or without trailing Z).
+
+    Capella timestamps use nanosecond precision (9 decimal places).
+    Python 3.10 fromisoformat only handles up to microseconds (6 places),
+    so we truncate the fractional seconds to 6 digits before parsing.
+    """
+    ts = ts.rstrip("Z")
+    # Truncate sub-microsecond digits if present (e.g. .778268633 → .778268)
+    if "." in ts:
+        base, frac = ts.split(".", 1)
+        ts = base + "." + frac[:6]
+    return datetime.fromisoformat(ts).replace(tzinfo=timezone.utc)
 
 
 def interpolate_state_vector(
@@ -100,9 +111,8 @@ def compute_bperp(meta_ref: dict, meta_sec: dict) -> float:
     """
     Compute the signed perpendicular baseline between two Capella SLC collects.
 
-    Uses the pre-computed `reference_antenna_position` (ECEF, metres) from each
-    extended JSON sidecar — no ISCE3 dependency required for a first-order estimate.
-    For sub-metre accuracy, use `compute_bperp_interp` which interpolates state vectors.
+    Uses `reference_antenna_position` when available (newer product versions);
+    falls back to state-vector interpolation at center_time otherwise.
 
     Sign convention: positive when the secondary satellite is on the far-range side
     of the reference (i.e., larger slant range).
@@ -119,19 +129,27 @@ def compute_bperp(meta_ref: dict, meta_sec: dict) -> float:
     img_ref = meta_ref["collect"]["image"]
     img_sec = meta_sec["collect"]["image"]
 
-    P1 = np.array(img_ref["reference_antenna_position"])   # satellite position, collect 1
-    P2 = np.array(img_sec["reference_antenna_position"])   # satellite position, collect 2
-    T  = np.array(img_ref["center_pixel"]["target_position"])  # scene centre (ECEF)
+    # Prefer pre-computed antenna position; fall back to state-vector interpolation
+    if "reference_antenna_position" in img_ref and "reference_antenna_position" in img_sec:
+        P1 = np.array(img_ref["reference_antenna_position"])
+        P2 = np.array(img_sec["reference_antenna_position"])
+    else:
+        svs_ref = meta_ref["collect"]["state"]["state_vectors"]
+        svs_sec = meta_sec["collect"]["state"]["state_vectors"]
+        ct_ref = _parse_iso(img_ref["center_pixel"]["center_time"])
+        ct_sec = _parse_iso(img_sec["center_pixel"]["center_time"])
+        P1, _ = interpolate_state_vector(svs_ref, ct_ref)
+        P2, _ = interpolate_state_vector(svs_sec, ct_sec)
 
+    T = np.array(img_ref["center_pixel"]["target_position"])
     return _bperp_from_positions(P1, P2, T, meta_ref)
 
 
 def compute_bperp_interp(meta_ref: dict, meta_sec: dict) -> float:
     """
-    Compute signed perpendicular baseline using state-vector interpolation.
+    Compute signed perpendicular baseline using state-vector interpolation (always).
 
-    More accurate than compute_bperp when the reference_antenna_position field
-    is unavailable or when sub-metre precision is needed.
+    Useful for validation or when reference_antenna_position is absent.
     """
     img_ref = meta_ref["collect"]["image"]
     svs_ref = meta_ref["collect"]["state"]["state_vectors"]
@@ -259,8 +277,15 @@ def extract_geometry(meta: dict) -> dict:
     """
     img = meta["collect"]["image"]
     cp = img["center_pixel"]
-    P = np.array(img["reference_antenna_position"])
     T = np.array(cp["target_position"])
+
+    # Satellite position: prefer pre-computed field, else interpolate
+    if "reference_antenna_position" in img:
+        P = np.array(img["reference_antenna_position"])
+    else:
+        svs = meta["collect"]["state"]["state_vectors"]
+        ct = _parse_iso(cp["center_time"])
+        P, _ = interpolate_state_vector(svs, ct)
 
     return {
         "antenna_pos_ecef": P.tolist(),
