@@ -103,10 +103,7 @@ git config --list | grep user
 ### Step 5 — Set Up the Python Environment
 
 ```bash
-# If the shared env already exists on your HPC cluster:
-conda run --prefix /scratch/$USER/hrwsi_s3client/torch-gpu \
-    python -c "import torch; print(torch.cuda.is_available())"
-# Should print: True
+
 
 # If you need to build the environment from scratch:
 conda create -n insar-dem python=3.10
@@ -117,11 +114,9 @@ pip install -e .
 pip install boto3 pystac capella-reader dask geopandas
 conda install -c conda-forge isce3
 
-# IMPORTANT — set this before running any rasterio script:
-export LD_LIBRARY_PATH=/scratch/$USER/hrwsi_s3client/torch-gpu/lib:$LD_LIBRARY_PATH
+
 ```
 
-Add the `export` line to your `~/.bashrc` so you don't forget it each session.
 
 ---
 
