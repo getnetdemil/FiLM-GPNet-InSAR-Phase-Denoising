@@ -1,8 +1,20 @@
 Claude.md
 project_update.md
 
-# datasets
+# datasets and large binary outputs
 data/
+*.tif
+*.tiff
+*.parquet
+*.h5
+*.hdf5
+*.nc
+
+# model checkpoints and experiment outputs
+*.pt
+*.pth
+experiments/enhanced/checkpoints/
+experiments/*/outputs/
 
 # logs
 logs/
@@ -10,3 +22,19 @@ logs/
 # python
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# environment
+.env
+.env.*
+
+# editors / OS
+.DS_Store
+.vscode/
+*.swp
+*~
