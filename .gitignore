@@ -1,5 +1,4 @@
 Claude.md
-project_update.md
 
 # datasets and large binary outputs
 data/
@@ -38,3 +37,5 @@ build/
 .vscode/
 *.swp
 *~
+
+Study_tutorial.md
