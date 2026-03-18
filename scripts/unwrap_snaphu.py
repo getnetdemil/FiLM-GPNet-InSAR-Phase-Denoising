@@ -90,8 +90,14 @@ def unwrap_with_snaphu_py(
     ntiles = (1, 1)
     if max(H, W) > 8192:
         ntiles = (4, 4)
-    elif max(H, W) > 4096:
+    elif max(H, W) >= 4096:
         ntiles = (2, 2)
+
+    # tile_overlap must be large enough for the tile size to avoid SNAPHU arc errors
+    # Rule of thumb: ≥128 px, and ≥5% of the tile dimension
+    tile_h = H // ntiles[0] if ntiles[0] > 1 else H
+    tile_w = W // ntiles[1] if ntiles[1] > 1 else W
+    tile_overlap = max(128, tile_h // 20, tile_w // 20)
 
     unw, conncomp = snaphu.unwrap(
         igram,
@@ -100,7 +106,7 @@ def unwrap_with_snaphu_py(
         cost=mode,
         init="mcf",
         ntiles=ntiles,
-        tile_overlap=32,
+        tile_overlap=tile_overlap,
         nproc=nproc,
     )
     return np.asarray(unw, dtype=np.float32), np.asarray(conncomp, dtype=np.uint32)
