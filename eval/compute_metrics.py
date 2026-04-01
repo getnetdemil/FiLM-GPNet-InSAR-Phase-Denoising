@@ -50,6 +50,7 @@ from evaluation.closure_metrics import (
     usable_pairs_fraction,
     temporal_consistency_residual,
 )
+from evaluation.dem_metrics import nmad as _nmad
 
 logging.basicConfig(
     level=logging.INFO,
@@ -300,9 +301,9 @@ def _load_coherence(pair_dir: Path) -> Optional[np.ndarray]:
         return None
 
 
-def _load_unw(pair_dir: Path) -> Optional[np.ndarray]:
+def _load_unw(pair_dir: Path, filename: str = "unw_phase.tif") -> Optional[np.ndarray]:
     import rasterio
-    path = pair_dir / "unw_phase.tif"
+    path = pair_dir / filename
     if not path.exists():
         return None  # avoid GDAL file-not-found noise
     try:
@@ -431,6 +432,7 @@ def collect_pair_stats(
     pair_dirs: list[Path],
     method: str,
     skip_snaphu: bool,
+    unw_filename: str = "unw_phase.tif",
 ) -> list[dict]:
     """Collect per-pair metrics needed for metrics 2 and 3."""
     results = []
@@ -447,7 +449,7 @@ def collect_pair_stats(
 
         # Metric 2: unwrap success rate
         if not skip_snaphu:
-            unw = _load_unw(pd_dir)
+            unw = _load_unw(pd_dir, filename=unw_filename)
             if unw is not None:
                 r["unwrap_success_rate"] = unwrap_success_rate(unw, coh)
 
@@ -721,6 +723,142 @@ def _save_temporal_residual_bar(
 
 
 # ---------------------------------------------------------------------------
+# Metric 4 helpers — DEM NMAD
+# ---------------------------------------------------------------------------
+
+_CAPELLA_ALTITUDE_M  = 525_000.0   # approximate orbital altitude
+_MANIFEST_CACHE: dict | None = None
+
+
+def _load_scene_index() -> dict:
+    """Load full_index.parquet keyed by scene id (cached)."""
+    global _MANIFEST_CACHE
+    if _MANIFEST_CACHE is not None:
+        return _MANIFEST_CACHE
+    manifest = ROOT / "data" / "manifests" / "full_index.parquet"
+    if not manifest.exists():
+        log.warning("full_index.parquet not found — M4 will be NaN.")
+        _MANIFEST_CACHE = {}
+        return _MANIFEST_CACHE
+    df = pd.read_parquet(manifest)
+    _MANIFEST_CACHE = {row["id"]: row for _, row in df.iterrows()}
+    return _MANIFEST_CACHE
+
+
+def _height_of_ambiguity(bperp_m: float, incidence_deg: float,
+                         center_freq_ghz: float) -> float:
+    """Height-of-ambiguity in metres (flat-Earth approximation)."""
+    if abs(bperp_m) < 10.0:
+        return float("nan")
+    wavelength_m = 3e8 / (center_freq_ghz * 1e9)
+    theta = np.radians(incidence_deg)
+    R     = _CAPELLA_ALTITUDE_M / np.cos(theta)
+    return wavelength_m * R * np.sin(theta) / (2.0 * abs(bperp_m))
+
+
+def _load_copernicus_patch(dem_path: Path, bbox_w: float, bbox_s: float,
+                           bbox_e: float, bbox_n: float) -> Optional[np.ndarray]:
+    """Return Copernicus DEM heights (float32) cropped to bbox, or None."""
+    try:
+        import rasterio
+        from rasterio.windows import from_bounds
+        with rasterio.open(dem_path) as src:
+            window = from_bounds(bbox_w, bbox_s, bbox_e, bbox_n, src.transform)
+            data   = src.read(1, window=window).astype(np.float32)
+            nodata = src.nodata
+        if nodata is not None:
+            data[data == nodata] = float("nan")
+        return data if data.size > 0 else None
+    except Exception as e:
+        log.debug("Copernicus read error: %s", e)
+        return None
+
+
+def _detrend_plane(arr: np.ndarray) -> np.ndarray:
+    """Subtract least-squares planar fit from a 2-D array (removes flat-earth ramp)."""
+    rows, cols = np.indices(arr.shape)
+    valid = np.isfinite(arr)
+    if valid.sum() < 10:
+        return arr
+    A = np.column_stack([rows[valid].ravel(), cols[valid].ravel(),
+                         np.ones(valid.sum())])
+    b = arr[valid].ravel()
+    try:
+        coeffs, *_ = np.linalg.lstsq(A, b, rcond=None)
+        plane = coeffs[0] * rows + coeffs[1] * cols + coeffs[2]
+        return arr - plane
+    except Exception:
+        return arr
+
+
+def _compute_m4_for_method(pair_dirs: list[Path], unw_filename: str,
+                            scene_index: dict, dem_path: Path) -> float:
+    """Compute mean per-pair DEM NMAD for one method."""
+    import rasterio
+    nmad_list: list[float] = []
+
+    for pd_dir in pair_dirs:
+        meta_path = pd_dir / "coreg_meta.json"
+        unw_path  = pd_dir / unw_filename
+        if not meta_path.exists() or not unw_path.exists():
+            continue
+
+        with open(meta_path) as f:
+            meta = json.load(f)
+
+        bperp_m       = meta.get("bperp_m", 0.0)
+        incidence_deg = meta.get("incidence_angle_deg", 45.0)
+        id_ref        = meta.get("id_ref", "")
+
+        scene = scene_index.get(id_ref)
+        if scene is None:
+            continue
+
+        h_amb = _height_of_ambiguity(bperp_m, incidence_deg,
+                                     float(scene["center_freq_ghz"]))
+        if not np.isfinite(h_amb):
+            continue
+
+        # Load unwrapped phase
+        try:
+            with rasterio.open(unw_path) as src:
+                unw = src.read(1).astype(np.float32)
+        except Exception:
+            continue
+
+        # Convert phase → height
+        h_insar = unw * h_amb / (2.0 * np.pi)
+        h_insar[~np.isfinite(h_insar)] = float("nan")
+
+        # Remove flat-earth ramp
+        h_insar = _detrend_plane(h_insar)
+
+        # Load reference DEM for scene bbox
+        h_ref = _load_copernicus_patch(
+            dem_path,
+            float(scene["bbox_w"]), float(scene["bbox_s"]),
+            float(scene["bbox_e"]), float(scene["bbox_n"]),
+        )
+        if h_ref is None or not np.any(np.isfinite(h_ref)):
+            continue
+
+        # Reference: median terrain height over scene bbox (scalar)
+        h_ref_median = float(np.nanmedian(h_ref))
+
+        # NMAD: scatter of (h_insar − h_ref_median) over valid pixels
+        valid = np.isfinite(h_insar)
+        if valid.sum() < 100:
+            continue
+        e = h_insar[valid] - h_ref_median
+        pair_nmad = float(1.4826 * np.median(np.abs(e - np.median(e))))
+        nmad_list.append(pair_nmad)
+
+    if not nmad_list:
+        return float("nan")
+    return float(np.mean(nmad_list))
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -764,6 +902,8 @@ def parse_args() -> argparse.Namespace:
                    help="Force overwrite existing ifg_film_unet.tif (re-run inference).")
     p.add_argument("--skip_snaphu_metrics", action="store_true",
                    help="Skip metrics 2/3/4 that require unw_phase.tif.")
+    p.add_argument("--copernicus_dem_dir", default=None,
+                   help="Dir containing hawaii_dem.tif (Copernicus GLO-30) for M4.")
     p.add_argument("--test_only", action="store_true",
                    help="Evaluate on test split only (last --test_frac pairs by date).")
     p.add_argument("--device", default=None,
@@ -851,15 +991,22 @@ def main() -> None:
         all_pairs, triplets_df, "film_unet", fallback_method="goldstein")
 
     # ── Metrics 2 & 3 ──────────────────────────────────────────────────────
-    # Per-pair coherence stats (shared for both methods)
-    pair_stats = collect_pair_stats(eval_pairs, "goldstein", args.skip_snaphu_metrics)
+    # Per-pair coherence stats — separate for each method's unwrapped phase
+    pair_stats_gold  = collect_pair_stats(eval_pairs, "goldstein",  args.skip_snaphu_metrics,
+                                          unw_filename="unw_phase.tif")
+    pair_stats_model = collect_pair_stats(eval_pairs, "film_unet",  args.skip_snaphu_metrics,
+                                          unw_filename="unw_phase_film_unet.tif")
+    # Alias for downstream code that still references pair_stats
+    pair_stats = pair_stats_gold
 
     if not args.skip_snaphu_metrics:
         # Metric 2: mean unwrap success rate across pairs
-        uwr_list = [r["unwrap_success_rate"] for r in pair_stats
-                    if "unwrap_success_rate" in r]
-        gold_uwr  = float(np.mean(uwr_list)) if uwr_list else float("nan")
-        model_uwr = float("nan")  # Film UNet uses goldstein phase for unwrapping currently
+        uwr_list_gold  = [r["unwrap_success_rate"] for r in pair_stats_gold
+                          if "unwrap_success_rate" in r]
+        uwr_list_model = [r["unwrap_success_rate"] for r in pair_stats_model
+                          if "unwrap_success_rate" in r]
+        gold_uwr  = float(np.mean(uwr_list_gold))  if uwr_list_gold  else float("nan")
+        model_uwr = float(np.mean(uwr_list_model)) if uwr_list_model else float("nan")
     else:
         gold_uwr  = float("nan")
         model_uwr = float("nan")
@@ -887,9 +1034,24 @@ def main() -> None:
     model_usable = usable_pairs_fraction(model_pair_stats, closure_threshold_rad=m_closure_thresh)
 
     # ── Metric 4: DEM NMAD ─────────────────────────────────────────────────
-    # Requires a reference DEM — not available in current setup
-    gold_nmad  = float("nan")
-    model_nmad = float("nan")
+    if args.copernicus_dem_dir and not args.skip_snaphu_metrics:
+        dem_path  = Path(args.copernicus_dem_dir) / "hawaii_dem.tif"
+        if dem_path.exists():
+            scene_idx  = _load_scene_index()
+            gold_nmad  = _compute_m4_for_method(eval_pairs, "unw_phase.tif",
+                                                 scene_idx, dem_path)
+            model_nmad = _compute_m4_for_method(eval_pairs, "unw_phase_film_unet.tif",
+                                                 scene_idx, dem_path)
+            log.info("M4 Goldstein NMAD=%.3f m  FiLMUNet NMAD=%.3f m",
+                     gold_nmad, model_nmad)
+        else:
+            log.warning("hawaii_dem.tif not found in %s — run download_copernicus_dem.py first.",
+                        args.copernicus_dem_dir)
+            gold_nmad  = float("nan")
+            model_nmad = float("nan")
+    else:
+        gold_nmad  = float("nan")
+        model_nmad = float("nan")
 
     # ── Metric 5: Temporal consistency ─────────────────────────────────────
     # Use all pairs for an overconstrained SBAS system; FiLMUNet falls back
