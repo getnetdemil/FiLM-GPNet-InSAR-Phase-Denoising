@@ -8,7 +8,7 @@ warmup_epochs: 2
 
 # Training duration
 num_epochs: 50
-batch_size: 8
+batch_size: 16
 
 # Loss weights (InSARLoss / LossWeights)
 loss_weights:
