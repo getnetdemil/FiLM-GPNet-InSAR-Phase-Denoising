@@ -259,7 +259,12 @@ def save_inference_outputs(
 # ---------------------------------------------------------------------------
 
 def _load_phase(pair_dir: Path, method: str) -> Optional[np.ndarray]:
-    """Load wrapped phase (H, W) for the given method."""
+    """Load wrapped phase (H, W) for the given method.
+
+    For large full-image rasters (>10M pixels) the array is spatially
+    subsampled to ~1M pixels so that the phase lookup dict used by M1
+    closure computation does not exhaust system RAM.
+    """
     import rasterio
     fname = "ifg_goldstein_complex_real_imag.tif" if method == "goldstein" else "ifg_film_unet.tif"
     path = pair_dir / fname
@@ -269,7 +274,12 @@ def _load_phase(pair_dir: Path, method: str) -> Optional[np.ndarray]:
         with rasterio.open(path) as src:
             re = src.read(1).astype(np.float32)
             im = src.read(2).astype(np.float32)
-        return np.arctan2(im, re)
+        phi = np.arctan2(im, re)
+        # Subsample large images to keep the phase-lookup dict in RAM
+        if phi.size > 10_000_000:
+            step = max(1, int(np.sqrt(phi.size / 1_000_000)))
+            phi = np.ascontiguousarray(phi[::step, ::step])
+        return phi
     except Exception as e:
         log.warning("Could not load %s: %s", path, e)
         return None

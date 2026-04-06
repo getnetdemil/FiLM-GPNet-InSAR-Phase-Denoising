@@ -424,6 +424,9 @@ class TripletTileDataset(Dataset):
         except Exception:
             return None
 
+        if coh.shape != (T, T):
+            return None
+
         if coh.mean() < self.min_coherence:
             return None
 
