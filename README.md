@@ -1,9 +1,11 @@
 Learning-Assisted InSAR DEM Enhancement
 ========================================
 
-**IEEE GRSS 2026 Data Fusion Contest** submission — *Self-Supervised InSAR Phase Denoising via Geometry-Conditioned Noise2Noise and Closure Consistency.*
+**IEEE GRSS 2026 Data Fusion Contest** submission.
 
-This repository implements **FiLMUNet**, a stack-aware, self-supervised deep learning pipeline for improving Interferometric SAR (InSAR) phase quality over large, geometry-diverse Capella Space X-band SAR stacks, with downstream improvements in DEM NMAD and temporal stack consistency.
+> **FiLMUNet: Geometry-Aware Pseudo-Supervised Phase Restoration with Zero-Shot Generalization for Large Temporal InSAR Stacks**
+
+This repository implements **FiLMUNet**, a stack-aware, pseudo-supervised deep learning pipeline for improving Interferometric SAR (InSAR) phase quality over large, geometry-diverse Capella Space X-band SAR stacks, with downstream improvements in DEM NMAD and temporal stack consistency.
 
 ---
 
@@ -28,31 +30,35 @@ FiLMUNet is evaluated against Goldstein filtering across three AOIs, including o
 
 ## Method
 
-### FiLMUNet
+### FiLMUNet Architecture
 
-A **FiLM-conditioned encoder-decoder** that denoises complex interferograms while conditioning on per-pair acquisition geometry.
+A **FiLM-conditioned encoder-decoder** that restores complex interferograms while conditioning on per-pair acquisition geometry. The Goldstein-filtered interferogram is used as input; per-pair geometry metadata modulates every decoder scale via Feature-wise Linear Modulation (FiLM).
 
 | Property | Value |
 |----------|-------|
-| Input | `(B, 3, H, W)` — Re, Im, coherence |
-| FiLM conditioning | `[Δt, θ_inc, θ_graze, B_perp, mode, look, SNR]` (7-dim, z-scored) |
-| Output | `(B, 3, H, W)` — Re_denoised, Im_denoised, log_variance |
-| Architecture | 4-scale encoder-decoder with skip connections; FiLM layers at each scale |
-| Parameters | ~4 M |
+| Input | `(B, 2, H, W)` — Goldstein-filtered Re, Im channels |
+| FiLM conditioning | `z = [Δt, θ_inc, θ_graze, B_perp, mode, look, SNR]` (7-dim, z-scored) |
+| Output | `(B, 3, H, W)` — Re_restored, Im_restored, log_variance |
+| Architecture | 4-scale U-Net, channels `[32, 64, 128, 256]`, 512-channel bottleneck; FiLM after each BN |
+| Parameters | 7.96 M |
 
-### Self-Supervised Training
+FiLM rescaling at each scale: `h̃ = (1 + γ(c)) ⊙ h + β(c)`, where `γ, β` are linear projections of the geometry embedding `c ∈ ℝ⁶⁴`. The residual form `(1 + γ)` initialises close to identity.
 
-No clean reference interferograms are required. The loss combines:
+### Pseudo-Supervised Training
 
-| Component | Weight | Mechanism |
-|-----------|--------|-----------|
-| Noise2Noise (sub-look MSE) | 1.0 | Even/odd FFT sub-look splits share phase, have independent speckle |
-| Uncertainty NLL | 0.5 | Calibrates the predicted per-pixel log-variance |
-| Triplet closure consistency | 0.3 | Enforces `wrap(φ_ab + φ_bc − φ_ac) → 0` |
-| Temporal consistency | 0.2 | Penalises deviation from the SBAS phase model |
-| Gradient preservation | 0.1 | Preserves fringe sharpness |
+FiLMUNet is trained **without clean reference interferograms**. Each SLC is split into two independent spectral sub-looks via FFT range-direction masking. The sub-look pair `(φ⁽¹⁾, φ⁽²⁾)` shares the deterministic interferometric phase but carries uncorrelated speckle — providing pseudo-supervision for Noise2Noise training. The combined loss is:
 
-The predicted uncertainty `σ²` propagates downstream as weights in SNAPHU phase unwrapping and SBAS stack inversion.
+| Component | Weight | Purpose |
+|-----------|--------|---------|
+| Noise2Noise L1 | 1.0 | Sub-look 1 as input, sub-look 2 as noisy pseudo-target |
+| Uncertainty NLL | 0.5 | Heteroscedastic calibration of per-pixel log-variance |
+| Triplet closure consistency | 0.3 | Enforces `wrap(φ̂_ab + φ̂_bc − φ̂_ac) → 0` over triplets |
+| SBAS temporal residual | 0.2 | Penalises deviation from the WLS phase model across the stack |
+| Gradient preservation | 0.1 | Prevents over-smoothing of phase fringes |
+
+**Training:** AdamW (lr=1e-4, weight decay=1e-5), cosine annealing, batch size 8, 50 epochs on a single A100 (40 GB). Seed 42.
+
+The predicted `σ²(p)` propagates downstream as diagonal weights `W = diag(1/σ̄²_p)` in SBAS stack inversion, replacing the uniform Goldstein weighting.
 
 ---
 
