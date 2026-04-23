@@ -208,4 +208,6 @@ See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) for:
 
 ## Citation
 
-If you use this work, please cite the IEEE GRSS 2026 Data Fusion Contest dataset and this repository.
+Authors
+
+Getnet Demil, Muhammad Farhan Humayun, Tomi Westerlund, Jukka Heikkonen, Mourad Oussalah
