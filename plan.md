@@ -1,8 +1,8 @@
 # IEEE GRSS 2026 Data Fusion Contest — Development Plan
 
-**Submission deadline: April 06, 2026 (23:59 AoE)**
+**Submission deadline: April 06, 2026 (23:59 AoE) — SUBMITTED**
 **Paper deadline: April 20 (internal) / April 28 (final)**
-**Today: March 18, 2026 — 19 days to submission**
+**Last updated: April 08, 2026 — post-submission**
 
 ---
 

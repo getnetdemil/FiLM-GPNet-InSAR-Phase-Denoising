@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getnet Demil Jenberia – AI &amp; Remote Sensing Researcher</title>
+  <meta name="description" content="Academic portfolio of Getnet Demil Jenberia – doctoral researcher in AI and remote sensing for hydrology at the University of Oulu, Finland. Research in deep learning, satellite image analysis, snow hydrology, and earth observation." />
+  <meta property="og:title" content="Getnet Demil Jenberia – AI &amp; Remote Sensing Researcher" />
+  <meta property="og:description" content="Doctoral researcher specialising in AI-driven satellite image processing, snow hydrology, and multi-modal data fusion at the University of Oulu, Finland." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== SCROLL PROGRESS ========== -->
+  <div id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-hidden="true"></div>
+
+  <!-- ========== NAV ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a class="nav-brand" href="/">
+        <span class="nav-brand-name">Getnet Demil</span>
+        <span class="nav-brand-sub">AI &amp; Remote Sensing</span>
+      </a>
+      <div class="nav-right">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#cv">CV</a></li>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-aurora" aria-hidden="true">
+      <div class="aurora-1"></div>
+      <div class="aurora-2"></div>
+      <div class="aurora-3"></div>
+    </div>
+    <div class="hero-stars" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-avatar">
+        <img src="images/getnet_profile.png" alt="Portrait of Getnet Demil Jenberia" class="avatar-img" width="180" height="180" />
+        <div class="avatar-ring" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-text">
+        <p class="hero-pre">Doctoral Researcher · AI &amp; Remote Sensing for Hydrology</p>
+        <h1 class="hero-name">Getnet Demil<br><span class="hero-name-accent">Jenberia</span></h1>
+        <p class="hero-affiliation">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"/></svg>
+          CMVS / ITEE, University of Oulu, Oulu, Finland
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Deep Learning</span>
+          <span class="hero-tag">Remote Sensing</span>
+          <span class="hero-tag">Snow Hydrology</span>
+          <span class="hero-tag">Computer Vision</span>
+          <span class="hero-tag">Earth Observation</span>
+          <span class="hero-tag">GeoAI</span>
+        </div>
+        <div class="hero-links">
+          <a class="btn btn-primary" href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+            Google Scholar
+          </a>
+          <a class="btn btn-outline" href="https://github.com/getnetdemil" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/getnetdemil/" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn btn-ghost" href="https://www.oulu.fi/en/researchers/getnet-demil-jenberia" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9 12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+            University Profile
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <a class="scroll-down" href="#about" aria-label="Scroll to About section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">Doctoral researcher bridging artificial intelligence and Earth observation for climate-critical hydrology challenges.</p>
+
+      <div class="about-metrics">
+        <div class="metric-item">
+          <span class="metric-number" data-count="20">20</span>
+          <span class="metric-label">Citations</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-number" data-count="5">5</span>
+          <span class="metric-label">Publications</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-number" data-count="4">4</span>
+          <span class="metric-label">Years Research</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-number" data-count="6">6</span>
+          <span class="metric-label">Projects</span>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I am a doctoral researcher at the <strong>Faculty of Information Technology and Electrical Engineering (ITEE), University of Oulu</strong>, specialising in artificial intelligence and remote sensing for hydrology modelling. My work focuses on developing deep learning methods that extract snow and water characteristics from multi-modal satellite imagery — combining Sentinel-1 SAR, Sentinel-2 optical, and DEM data to build climate-resilient runoff prediction models.
+          </p>
+          <p>
+            My academic journey spans multiple continents: a BSc and MSc in electrical engineering and communication systems from <strong>Bahir Dar University</strong>, Ethiopia, followed by an <strong>Erasmus Mundus Joint Master Degree</strong> (IPCV) across the University of Bordeaux (France), Autonomous University of Madrid (Spain), and Pázmány Péter Catholic University (Hungary). I am currently co-organising the <strong>HydroImaging Workshop</strong> at IEEE ICIP 2026 in Tampere, Finland — a testament to my commitment to the growing GeoAI community.
+          </p>
+          <p>
+            Beyond academia, I have worked as a Junior Electrical Engineer at the <strong>Ethiopian Electric Utility</strong> and Chief Technology Support at the <strong>American Space Ethiopia (U.S. Embassy)</strong>, grounding my research in real-world engineering challenges and cross-cultural collaboration.
+          </p>
+        </div>
+
+        <div class="about-highlights">
+          <div class="highlight-card">
+            <div class="highlight-icon-wrap" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M20.188 10.934c.2.54.312 1.122.312 1.733 0 2.6-1.8 4.77-4.244 5.334l-.944.222A8 8 0 013.5 12.667C3.5 8.425 7.07 5 11.5 5c.587 0 1.154.068 1.695.197"/><path d="M16.5 3.5l2 2-2 2"/><path d="M17 5.5H12.5"/></svg>
+            </div>
+            <div>
+              <h3>Earth Observation & GeoAI</h3>
+              <p>AI-driven snow &amp; water estimation from Sentinel-1 SAR and Sentinel-2 optical satellite data for climate-resilient hydrology.</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon-wrap" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <h3>Erasmus Mundus Scholar</h3>
+              <p>EU-funded EMJMD scholarship in Image Processing &amp; Computer Vision, studying at three top European universities across France, Spain, and Hungary.</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon-wrap" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div>
+              <h3>IEEE ICIP 2026 Organiser</h3>
+              <p>Co-organising the <em>HydroImaging Workshop</em> on mining imaging data for hydrological and environmental modelling at IEEE ICIP, Tampere, Finland.</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon-wrap" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <div>
+              <h3>International Experience</h3>
+              <p>Studied and worked across Ethiopia, France, Spain, Hungary, and Finland — bringing a truly global perspective to AI research and engineering practice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEWS ========== -->
+  <section class="section section-alt" id="news">
+    <div class="container">
+      <h2 class="section-title">Latest News</h2>
+      <p class="section-subtitle">Recent conference presentations, publications, and research milestones.</p>
+
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-date">
+            <span class="news-date-month">Nov</span>
+            <span class="news-date-year">2025</span>
+          </div>
+          <div class="news-content">
+            <span class="news-type">Presentation</span>
+            <p class="news-headline">CrossFuse Research Presented at Digital Waters Flagship</p>
+            <p class="news-desc">Presented CrossFuse — a hybrid CNN-Transformer architecture for Sentinel-1 SAR and Sentinel-2 optical data fusion for snow cover estimation — at the Digital Waters Flagship Biannual Meeting, Aalto University, Espoo, Finland.</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-date">
+            <span class="news-date-month">Aug</span>
+            <span class="news-date-year">2025</span>
+          </div>
+          <div class="news-content">
+            <span class="news-type">Conference</span>
+            <p class="news-headline">Paper Presented at DIGeMERGE 2025</p>
+            <p class="news-desc">Presented research on a machine learning approach for emergency communication ecosystems at the Digital Emergency Communication (DIGeMERGE) 2025 Conference, focusing on AI-enhanced citizen participation in Nordic countries.</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-date">
+            <span class="news-date-month">Jun</span>
+            <span class="news-date-year">2025</span>
+          </div>
+          <div class="news-content">
+            <span class="news-type">Conference</span>
+            <p class="news-headline">Attended CVPR 2025 in Nashville, Tennessee</p>
+            <p class="news-desc">Participated in the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2025), Nashville, TN, USA — the flagship venue for computer vision and deep learning research.</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-date">
+            <span class="news-date-month">2025</span>
+            <span class="news-date-year">In Press</span>
+          </div>
+          <div class="news-content">
+            <span class="news-type">Publication</span>
+            <p class="news-headline">Journal Paper Accepted in Earth Science Informatics</p>
+            <p class="news-desc">"Seeing through the clouds: enhanced snow and cloud segmentation in Sentinel-2 imagery with mDeepLabV3+" accepted in <em>Earth Science Informatics</em> (Springer). DOI: 10.1007/s12145-025-01950-6</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-date">
+            <span class="news-date-month">2025</span>
+            <span class="news-date-year"></span>
+          </div>
+          <div class="news-content">
+            <span class="news-type">Publication</span>
+            <p class="news-headline">Systematic Review Published in Journal of Hydrology</p>
+            <p class="news-desc">"Advances in image-based estimation of snow variables" published in <em>Journal of Hydrology</em> (Elsevier). A comprehensive review of deep learning architectures for snow hydrology modelling. DOI: 10.1016/j.jhydrol.2025.132855</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-date">
+            <span class="news-date-month">Oct</span>
+            <span class="news-date-year">2024</span>
+          </div>
+          <div class="news-content">
+            <span class="news-type">Workshop</span>
+            <p class="news-headline">HydroImaging Workshop Accepted at IEEE ICIP 2026</p>
+            <p class="news-desc">Co-organised the HydroImaging workshop — "Mining Imaging Data for Hydrological and Environmental Modelling" — accepted at IEEE ICIP 2026, Tampere, Finland (September 13–17, 2026).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESEARCH ========== -->
+  <section class="section" id="research">
+    <div class="container">
+      <h2 class="section-title">Research</h2>
+      <p class="section-subtitle">Applying AI and multi-modal satellite data to advance our understanding of the cryosphere and water cycle.</p>
+
+      <div class="research-projects">
+        <div class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3>Multi-Modal Satellite Data Fusion</h3>
+          <p>Developing CrossFuse — a hybrid CNN-Transformer architecture that fuses Sentinel-1 SAR and Sentinel-2 optical imagery to produce high-resolution snow cover and water equivalent estimates, supporting runoff prediction and flood risk assessment.</p>
+          <div class="project-tags">
+            <span class="project-tag">Sentinel-1 SAR</span>
+            <span class="project-tag">Sentinel-2</span>
+            <span class="project-tag">CNN-Transformer</span>
+            <span class="project-tag">Snow Hydrology</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Deep Learning for Snow Segmentation</h3>
+          <p>Designing mDeepLabV3+ — a modified DeepLabV3+ with ResNet backbone that separates snow from clouds in satellite imagery with state-of-the-art accuracy, enabling reliable year-round snow monitoring critical for water resource management.</p>
+          <div class="project-tags">
+            <span class="project-tag">DeepLabV3+</span>
+            <span class="project-tag">ResNet</span>
+            <span class="project-tag">Semantic Segmentation</span>
+            <span class="project-tag">Cloud Detection</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3>AI for Climate &amp; Emergency Response</h3>
+          <p>Leveraging NLP and social media analytics for real-time local climate impact monitoring, and building AI-enhanced early warning systems that improve emergency communication ecosystems in Nordic countries.</p>
+          <div class="project-tags">
+            <span class="project-tag">NLP</span>
+            <span class="project-tag">Social Media Analytics</span>
+            <span class="project-tag">Early Warning Systems</span>
+            <span class="project-tag">Climate AI</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Research Interests</h3>
+      <div class="interests-grid">
+        <div class="interest-card">
+          <div class="interest-icon-wrap" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <h3>GeoAI &amp; Earth Observation</h3>
+          <p>Foundation models and vision transformers applied to large-scale satellite imagery for environmental monitoring.</p>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon-wrap" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Multi-Modal Data Fusion</h3>
+          <p>Combining SAR, optical, DEM, and reanalysis data streams for richer environmental scene understanding.</p>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon-wrap" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Foundation Models for EO</h3>
+          <p>Adapting large pre-trained vision models to geoscience tasks such as change detection and hydrological parameter retrieval.</p>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon-wrap" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+          </div>
+          <h3>Climate-Focused AI</h3>
+          <p>Building data-driven tools that support climate adaptation — snow water equivalent estimation, flood mapping, and vegetation monitoring.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-subtitle">Selected research and engineering projects — from satellite image analysis to assistive robotics and climate AI.</p>
+
+      <div class="projects-grid">
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <div class="project-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <span class="project-card-title">CrossFuse</span>
+            <span class="project-status-badge status-active">Active</span>
+          </div>
+          <p class="project-card-desc">Hybrid CNN-Transformer architecture for fusing Sentinel-1 SAR and Sentinel-2 optical satellite data to estimate high-resolution snow cover extent and snow water equivalent. The model integrates spectral band optimisation, attention mechanisms, and transfer learning to achieve superior performance on high-latitude, snow-dominated landscapes.</p>
+          <div class="tech-badges">
+            <span class="tech-badge">PyTorch</span>
+            <span class="tech-badge">Google Earth Engine</span>
+            <span class="tech-badge">Sentinel-1 SAR</span>
+            <span class="tech-badge">Sentinel-2</span>
+            <span class="tech-badge">Transformers</span>
+            <span class="tech-badge">Python</span>
+          </div>
+          <div class="project-card-links">
+            <a class="project-card-link" href="https://github.com/getnetdemil" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <div class="project-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span class="project-card-title">mDeepLabV3+</span>
+            <span class="project-status-badge status-published">Published</span>
+          </div>
+          <p class="project-card-desc">Modified DeepLabV3+ architecture with ResNet-50/101 backbone for snow-cloud segmentation in Sentinel-2 multispectral imagery. Introduces dilated convolutions, optimised spectral band selection, and domain-adapted training to reliably separate snow cover from cloud cover — a persistent challenge in remote sensing.</p>
+          <div class="tech-badges">
+            <span class="tech-badge">TensorFlow</span>
+            <span class="tech-badge">OpenCV</span>
+            <span class="tech-badge">ResNet</span>
+            <span class="tech-badge">DeepLabV3+</span>
+            <span class="tech-badge">Sentinel-2</span>
+            <span class="tech-badge">Python</span>
+          </div>
+          <div class="project-card-links">
+            <a class="project-card-link" href="https://doi.org/10.1007/s12145-025-01950-6" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Paper (ESI)
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <div class="project-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <span class="project-card-title">Climate Social Media Monitor</span>
+            <span class="project-status-badge status-published">Published</span>
+          </div>
+          <p class="project-card-desc">Real-time NLP pipeline that mines social media streams to detect and monitor local climate impact events. Integrates transformer-based text classifiers with geo-tagged post analysis to identify floods, droughts, and extreme weather episodes as they unfold — bridging citizen science and AI for climate resilience.</p>
+          <div class="tech-badges">
+            <span class="tech-badge">NLP</span>
+            <span class="tech-badge">Transformers</span>
+            <span class="tech-badge">Social Media APIs</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">SIGIR 2024</span>
+          </div>
+          <div class="project-card-links">
+            <a class="project-card-link" href="https://doi.org/10.48550/arXiv.2504.01162" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Paper (arXiv)
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <div class="project-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <span class="project-card-title">HydroImaging Workshop @ ICIP 2026</span>
+            <span class="project-status-badge status-active">Upcoming</span>
+          </div>
+          <p class="project-card-desc">Co-organising the first HydroImaging Workshop — "Mining Imaging Data for Hydrological and Environmental Modelling" — at IEEE ICIP 2026, Tampere, Finland (Sep 13–17, 2026). The workshop brings together Earth observation, computer vision, and environmental modelling researchers. Featuring keynotes, oral sessions, and poster presentations.</p>
+          <div class="tech-badges">
+            <span class="tech-badge">IEEE ICIP 2026</span>
+            <span class="tech-badge">Tampere, Finland</span>
+            <span class="tech-badge">Sep 2026</span>
+            <span class="tech-badge">Workshop Organisation</span>
+          </div>
+          <div class="project-card-links">
+            <a class="project-card-link" href="https://hydroimaging.github.io" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Workshop Website
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <div class="project-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="8" rx="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <span class="project-card-title">Smart Microscope for Disease Diagnosis</span>
+            <span class="project-status-badge status-award">Best Africa Project</span>
+          </div>
+          <p class="project-card-desc">Computer vision system for automated protozoan disease detection using a custom-built microscopy platform. Achieved real-time classification of blood-borne pathogens, reducing diagnostic time in resource-limited clinical settings. Recognised as the Best Project at Bahir Dar University (2018) and one of the <em>Best 50 African Projects of the Year</em> at Africa Innovation Week (2019).</p>
+          <div class="tech-badges">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">OpenCV</span>
+            <span class="tech-badge">Computer Vision</span>
+            <span class="tech-badge">Medical AI</span>
+            <span class="tech-badge">Raspberry Pi</span>
+          </div>
+          <div class="project-card-links">
+            <span class="project-card-link" style="cursor:default;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Africa Innovation Week 2019
+            </span>
+          </div>
+        </div>
+
+        <div class="project-card-full">
+          <div class="project-card-header">
+            <div class="project-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+            </div>
+            <span class="project-card-title">Vision-Aided Assistive Robotics</span>
+            <span class="project-status-badge status-published">Published</span>
+          </div>
+          <p class="project-card-desc">European consortium research project developing 6D pose estimation for individuals with upper-limb disabilities. Implemented DenseFusion model (joint point cloud + RGB processing) for accurate object pose recognition in unstructured environments, enabling robotic arms to grasp everyday objects reliably for users who cannot perform the task themselves.</p>
+          <div class="tech-badges">
+            <span class="tech-badge">PyTorch</span>
+            <span class="tech-badge">ROS</span>
+            <span class="tech-badge">Point Cloud</span>
+            <span class="tech-badge">6D Pose Estimation</span>
+            <span class="tech-badge">DenseFusion</span>
+            <span class="tech-badge">C++</span>
+          </div>
+          <div class="project-card-links">
+            <a class="project-card-link" href="https://github.com/getnetdemil" target="_blank" rel="noopener noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PUBLICATIONS ========== -->
+  <section class="section" id="publications">
+    <div class="container">
+      <h2 class="section-title">Publications</h2>
+      <p class="section-subtitle">5 publications · 20+ citations — journals, conference papers, and preprints in AI, remote sensing, and hydrology.</p>
+
+      <div class="pub-controls">
+        <div class="pub-search-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="pub-search" id="pubSearch" type="search" placeholder="Search by title, author, or keyword…" aria-label="Search publications" />
+        </div>
+        <div class="pub-filters" role="group" aria-label="Filter publications by type">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="journal">Journal</button>
+          <button class="filter-btn" data-filter="conference">Conference</button>
+          <button class="filter-btn" data-filter="preprint">Preprint</button>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="pub-year-group">
+        <div class="pub-year-label" data-count="4">2025</div>
+        <div class="publications-list">
+
+          <div class="publication-card" data-type="journal">
+            <div class="pub-meta-row">
+              <span class="pub-badge pub-badge-journal">Journal</span>
+              <span class="pub-quality pub-q1">Q1</span>
+              <span class="pub-cites">Journal of Hydrology</span>
+            </div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.1016/j.jhydrol.2025.132855" target="_blank" rel="noopener noreferrer">
+                Advances in image-based estimation of snow variable: A systematic literature review on recent studies
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Getnet Demil Jenberia</strong> et al.</p>
+            <p class="pub-venue"><em>Journal of Hydrology</em>, Elsevier, 2025. DOI: 10.1016/j.jhydrol.2025.132855</p>
+          </div>
+
+          <div class="publication-card" data-type="journal">
+            <div class="pub-meta-row">
+              <span class="pub-badge pub-badge-journal">Journal</span>
+              <span class="pub-quality pub-q1">Q1</span>
+              <span class="pub-cites">Earth Science Informatics</span>
+            </div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.1007/s12145-025-01950-6" target="_blank" rel="noopener noreferrer">
+                Seeing through the clouds: enhanced snow and cloud segmentation in Sentinel-2 imagery with mDeepLabV3+
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Getnet Demil Jenberia</strong> et al.</p>
+            <p class="pub-venue"><em>Earth Science Informatics</em>, Springer, 2025 (In Press). DOI: 10.1007/s12145-025-01950-6</p>
+          </div>
+
+          <div class="publication-card" data-type="preprint">
+            <div class="pub-meta-row">
+              <span class="pub-badge pub-badge-preprint">Preprint</span>
+              <span class="pub-cites">arXiv 2025</span>
+            </div>
+            <p class="pub-title">
+              <a href="https://arxiv.org/abs/2506.18926" target="_blank" rel="noopener noreferrer">
+                AI-based Approach in Early Warning Systems: Focus on Emergency Communication Ecosystem and Citizen Participation in Nordic Countries
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Getnet Demil Jenberia</strong> et al.</p>
+            <p class="pub-venue">arXiv preprint, 2025. arXiv:2506.18926</p>
+          </div>
+
+          <div class="publication-card" data-type="conference">
+            <div class="pub-meta-row">
+              <span class="pub-badge pub-badge-conf">Conference</span>
+              <span class="pub-cites">Nordic AI for Climate 2025</span>
+            </div>
+            <p class="pub-title">
+              AI-Enhanced Snow and Cloud Segmentation in Sentinel-2 Imagery Using Dilated DeepLabv3+ with ResNet Backbone
+            </p>
+            <p class="pub-authors"><strong>Getnet Demil Jenberia</strong> et al.</p>
+            <p class="pub-venue"><em>Nordic Workshop on AI for Climate Change</em>, Copenhagen, Denmark, 2025</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="pub-year-group">
+        <div class="pub-year-label" data-count="1">2024</div>
+        <div class="publications-list">
+
+          <div class="publication-card" data-type="conference">
+            <div class="pub-meta-row">
+              <span class="pub-badge pub-badge-conf">Conference</span>
+              <span class="pub-cites">SIGIR 2024 Workshop</span>
+            </div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.48550/arXiv.2504.01162" target="_blank" rel="noopener noreferrer">
+                Leveraging Social Media for Real-time Monitoring of Local Climate Impact
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Getnet Demil Jenberia</strong> et al.</p>
+            <p class="pub-venue"><em>SIGIR 2024 Workshop on Information Retrieval for Climate Impact</em>, Washington DC, USA, 2024. DOI: 10.48550/arXiv.2504.01162</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="pubNoResults" class="pub-no-results" role="alert">
+        No publications match your search. Try different keywords or clear the filter.
+      </div>
+
+      <div class="scholar-cta">
+        <a class="btn btn-outline" href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+          View all on Google Scholar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CV ========== -->
+  <section class="section section-alt" id="cv">
+    <div class="container">
+      <h2 class="section-title">Curriculum Vitae</h2>
+      <p class="section-subtitle">Academic training, research positions, and professional experience across four countries.</p>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <span class="timeline-period">2024 – present</span>
+          <p class="timeline-role">Doctoral Researcher (Research Career Stage I)</p>
+          <p class="timeline-org">University of Oulu — ITEE Faculty, Oulu, Finland</p>
+          <p class="timeline-desc">Developing AI-driven methods for satellite image processing to determine snow water characteristics from Sentinel-1/2 imagery. Integrating multi-modal sensing data with deep learning (PyTorch, TensorFlow) for hydrological modelling accuracy enhancement. Co-organising the HydroImaging Workshop at IEEE ICIP 2026. Funded doctoral position.</p>
+          <span class="timeline-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+            Current Position
+          </span>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-period">2024</span>
+          <p class="timeline-role">Computer Vision Research Associate</p>
+          <p class="timeline-org">University of Oulu, Finland</p>
+          <p class="timeline-desc">Established comprehensive data processing pipelines for hydrological parameter estimation from image sensors. Achieved breakthrough accuracy in snow classification using modified DeepLabV3+ architecture. Developed novel deep learning models for snow-cloud segmentation in Sentinel-2 satellite imagery.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-period">2022 – 2024</span>
+          <p class="timeline-role">Erasmus Mundus Joint Master Degree — Image Processing &amp; Computer Vision (IPCV)</p>
+          <p class="timeline-org">University of Bordeaux (France) · Autonomous University of Madrid (Spain) · Pázmány Péter Catholic University (Hungary)</p>
+          <p class="timeline-desc">EU-funded Erasmus Mundus EMJMD scholarship. Specialised in semantic segmentation, object detection, and 6D pose estimation. Thesis focused on deep learning applications in environmental monitoring. Graduated from three internationally-ranked universities across France, Spain, and Hungary.</p>
+          <span class="timeline-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Erasmus Mundus Scholarship
+          </span>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-period">2020 – 2022</span>
+          <p class="timeline-role">MSc in Communication System Engineering</p>
+          <p class="timeline-org">Bahir Dar University, Bahir Dar, Ethiopia</p>
+          <p class="timeline-desc">Advanced study in signal processing, communication systems, digital image processing, and computer vision fundamentals. Research bridging communication theory with early-stage AI applications.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-period">2020 – 2022</span>
+          <p class="timeline-role">Junior Electrical Engineer</p>
+          <p class="timeline-org">Ethiopian Electric Utility, Ethiopia</p>
+          <p class="timeline-desc">Full-time engineering role maintaining and upgrading electrical infrastructure. Applied systems engineering principles in field operations across multiple sites in Ethiopia.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-period">2020 – 2022</span>
+          <p class="timeline-role">Chief Technology Support</p>
+          <p class="timeline-org">American Space Ethiopia (U.S. Embassy), Ethiopia</p>
+          <p class="timeline-desc">Managed technology infrastructure at the American Space cultural centre operated by the U.S. Embassy. Led technology initiatives supporting public digital access, educational programmes, and cross-cultural exchange.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-period">2013 – 2018</span>
+          <p class="timeline-role">BSc in Electrical Engineering (Electronics &amp; Communication)</p>
+          <p class="timeline-org">Bahir Dar University, Bahir Dar, Ethiopia</p>
+          <p class="timeline-desc">Capstone project: <em>Smart Microscope for Automatic Protozoan Disease Detection</em> — awarded Best Project at Bahir Dar University and recognised as one of the Best 50 African Projects at Africa Innovation Week 2019.</p>
+          <span class="timeline-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Best Project Award
+          </span>
+        </div>
+
+      </div>
+
+      <div class="scholar-cta" style="margin-top: 48px;">
+        <a class="btn btn-ghost" href="getnetdemil.github.io/skills/Getnet_Demil_Resume.pdf" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Full CV (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICE ========== -->
+  <section class="section" id="service">
+    <div class="container">
+      <h2 class="section-title">Academic Service</h2>
+      <p class="section-subtitle">Workshop organisation, conference activities, and professional contributions to the research community.</p>
+
+      <div class="service-layout">
+
+        <div class="service-block">
+          <div class="service-block-header">
+            <div class="service-block-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h3>Workshop Organisation</h3>
+          </div>
+
+          <div class="service-event">
+            <div class="service-event-dot"></div>
+            <div>
+              <p class="service-event-title">HydroImaging Workshop Co-Organiser</p>
+              <p class="service-event-meta">Mining Imaging Data for Hydrological &amp; Environmental Modelling · IEEE ICIP 2026 · Tampere, Finland · Sep 13–17, 2026</p>
+            </div>
+          </div>
+          <div class="service-event">
+            <div class="service-event-dot dot-accent"></div>
+            <div>
+              <p class="service-event-title">Keynote by Prof. Kevin Tansey (Univ. Leicester)</p>
+              <p class="service-event-meta">Sponsored by Digital Waters Flagship · Remote Sensing of vegetation, fire and floods.</p>
+            </div>
+          </div>
+          <div class="service-event">
+            <div class="service-event-dot dot-purple"></div>
+            <div>
+              <p class="service-event-title">Technical Programme Development</p>
+              <p class="service-event-meta">Managing oral presentations, poster sessions, and panel discussions for the full-day workshop.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-block">
+          <div class="service-block-header">
+            <div class="service-block-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Conference Participation</h3>
+          </div>
+
+          <div class="service-event">
+            <div class="service-event-dot"></div>
+            <div>
+              <p class="service-event-title">CVPR 2025</p>
+              <p class="service-event-meta">IEEE/CVF Conference on Computer Vision &amp; Pattern Recognition · Nashville, TN, USA · Jun 11–15, 2025</p>
+            </div>
+          </div>
+          <div class="service-event">
+            <div class="service-event-dot dot-accent"></div>
+            <div>
+              <p class="service-event-title">DIGeMERGE 2025</p>
+              <p class="service-event-meta">Digital Emergency Communication Conference · Presenter · Aug 21, 2025</p>
+            </div>
+          </div>
+          <div class="service-event">
+            <div class="service-event-dot dot-purple"></div>
+            <div>
+              <p class="service-event-title">Digital Waters Flagship 2025</p>
+              <p class="service-event-meta">Biannual Meeting · Aalto University, Espoo, Finland · Nov 2025 · Presented CrossFuse</p>
+            </div>
+          </div>
+          <div class="service-event">
+            <div class="service-event-dot"></div>
+            <div>
+              <p class="service-event-title">SIGIR 2024 Workshop</p>
+              <p class="service-event-meta">Information Retrieval for Climate Impact · Washington DC, USA · 2024</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Skills / Tech Stack -->
+      <p class="skills-section-title">Technical Skills &amp; Tools</p>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <span class="skill-icon">🐍</span>
+          <span class="skill-label">Python</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🔥</span>
+          <span class="skill-label">PyTorch</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🧠</span>
+          <span class="skill-label">TensorFlow</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🌍</span>
+          <span class="skill-label">Google Earth Engine</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🛰️</span>
+          <span class="skill-label">Sentinel (SAR/Optical)</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">👁️</span>
+          <span class="skill-label">OpenCV</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">📐</span>
+          <span class="skill-label">MATLAB</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🐳</span>
+          <span class="skill-label">Docker</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🐧</span>
+          <span class="skill-label">Linux</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">⚙️</span>
+          <span class="skill-label">C++</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">🤖</span>
+          <span class="skill-label">ROS</span>
+        </div>
+        <div class="skill-item">
+          <span class="skill-icon">📊</span>
+          <span class="skill-label">Git &amp; GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Open to research collaborations, academic discussions, and project inquiries.</p>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <h3>Email</h3>
+            <a href="mailto:getnet.demil@oulu.fi">getnet.demil@oulu.fi</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </div>
+          <div>
+            <h3>GitHub</h3>
+            <a href="https://github.com/getnetdemil" target="_blank" rel="noopener noreferrer">github.com/getnetdemil</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div>
+            <h3>LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/getnetdemil/" target="_blank" rel="noopener noreferrer">linkedin.com/in/getnetdemil</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.434h2.297c3.272 0 3.9-2.122 3.9-3.722 0-2.313-1.275-3.712-3.853-3.712h-2.344z"/></svg>
+          </div>
+          <div>
+            <h3>ORCID</h3>
+            <a href="https://orcid.org/0009-0006-5158-0895" target="_blank" rel="noopener noreferrer">0009-0006-5158-0895</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9 12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+          </div>
+          <div>
+            <h3>University Profile</h3>
+            <a href="https://www.oulu.fi/en/researchers/getnet-demil-jenberia" target="_blank" rel="noopener noreferrer">oulu.fi/researchers/getnet-demil</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+          </div>
+          <div>
+            <h3>Google Scholar</h3>
+            <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank" rel="noopener noreferrer">Scholar Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-copy">
+        &copy; <span id="year"></span> <span>Getnet Demil Jenberia</span> · Doctoral Researcher, University of Oulu, Finland
+      </p>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

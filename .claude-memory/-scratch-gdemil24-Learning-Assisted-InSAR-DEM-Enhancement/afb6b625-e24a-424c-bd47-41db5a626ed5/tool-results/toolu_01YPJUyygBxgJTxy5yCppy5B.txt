@@ -1,0 +1,233 @@
+scripts/select_triplet_completing_pairs.py-31-def build_proc_set(processed_dir: Path, pair_lookup: set) -> set:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-32-    """
+scripts/select_triplet_completing_pairs.py:33:    Read coreg_meta.json in each processed pair directory and return the set of
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-34-    canonical (id_ref, id_sec) keys that have been processed.
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-35-
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-38-    proc = set()
+scripts/select_triplet_completing_pairs.py-39-    for d in sorted(processed_dir.iterdir()):
+scripts/select_triplet_completing_pairs.py:40:        meta_path = d / "coreg_meta.json"
+scripts/select_triplet_completing_pairs.py-41-        if not meta_path.exists():
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-42-            continue
+--
+scripts/select_triplet_completing_pairs.py-73-    pair_lookup: set = set(zip(pairs_df["id_ref"], pairs_df["id_sec"]))
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-74-
+scripts/select_triplet_completing_pairs.py:75:    # Build processed set from coreg_meta.json files
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/select_triplet_completing_pairs.py-76-    proc_set = build_proc_set(processed_dir, pair_lookup)
+scripts/select_triplet_completing_pairs.py-77-    print(f"Processed pairs found:  {len(proc_set)}")
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_nmad.py-86-    """Return (nmad_m, |bperp|) or (nan, nan) if pair is invalid/skipped."""
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_nmad.py-87-    import rasterio
+scripts/plot_dem_nmad.py:88:    meta_path = pair_dir / "coreg_meta.json"
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_nmad.py-89-    unw_path  = pair_dir / unw_file
+scripts/plot_dem_nmad.py-90-    if not meta_path.exists() or not unw_path.exists():
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-967-
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-968-
+scripts/preprocess_pairs_full_image.py:969:def write_coreg_meta_json(out_dir: Path,
+scripts/preprocess_pairs_full_image.py-970-                          master_meta: CapellaMeta,
+scripts/preprocess_pairs_full_image.py-971-                          slave_meta: CapellaMeta,
+--
+scripts/preprocess_pairs_full_image.py-996-        "q_score": q_score,
+scripts/preprocess_pairs_full_image.py-997-        "bperp_m": float(compatibility["baseline_perpendicular_m"]),
+scripts/preprocess_pairs_full_image.py:998:        "row_offset_px": float(np.mean(row_vals)) if row_vals.size else float("nan"),
+scripts/preprocess_pairs_full_image.py-999-        "col_offset_px": float(np.mean(col_vals)) if col_vals.size else float("nan"),
+scripts/preprocess_pairs_full_image.py:1000:        "patch_size": int(patch_win),
+scripts/preprocess_pairs_full_image.py:1001:        "patch_row_ref": int(H // 2),
+scripts/preprocess_pairs_full_image.py:1002:        "patch_col_ref": int(W // 2),
+scripts/preprocess_pairs_full_image.py-1003-        "cc_peak_mean": float(np.mean(peak_vals)) if peak_vals.size else float("nan"),
+scripts/preprocess_pairs_full_image.py-1004-        "cc_peak_min": float(np.min(peak_vals)) if peak_vals.size else float("nan"),
+--
+scripts/preprocess_pairs_full_image.py-1021-        "coreg_stage": "pass2" if "pass2" in diagnostics.get("selected_candidate", "") else "pass1",
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1022-    }
+scripts/preprocess_pairs_full_image.py:1023:    with open(out_dir / "coreg_meta.json", "w", encoding="utf-8") as f:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1024-        json.dump(meta, f, indent=2, cls=NpEncoder)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1025-
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1280-        diagnostics["runtime_total_sec"] = total_runtime_sec
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1281-        diagnostics["runtime_total_min"] = total_runtime_sec / 60.0
+scripts/preprocess_pairs_full_image.py:1282:        write_coreg_meta_json(out_dir, master_meta, slave_meta, compatibility, diagnostics, final_tps, patch_win, H, W)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1283-        write_coreg_residuals_txt(out_dir, final_tps)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1284-        _toc("write_metadata", t0)
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1343-    diagnostics["runtime_total_sec"] = total_runtime_sec
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1344-    diagnostics["runtime_total_min"] = total_runtime_sec / 60.0
+scripts/preprocess_pairs_full_image.py:1345:    write_coreg_meta_json(out_dir, master_meta, slave_meta, compatibility, diagnostics, final_tps, patch_win, H, W)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs_full_image.py-1346-    write_coreg_residuals_txt(out_dir, final_tps)
+scripts/preprocess_pairs_full_image.py-1347-    with open(out_dir / "diagnostics.json", "w", encoding="utf-8") as f:
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/assess_coreg_quality.py-33-    ifg_path = pair_dir / "ifg_goldstein.tif"
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/assess_coreg_quality.py-34-    coh_path = pair_dir / "coherence.tif"
+scripts/assess_coreg_quality.py:35:    meta_path = pair_dir / "coreg_meta.json"
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/assess_coreg_quality.py-36-
+scripts/assess_coreg_quality.py-37-    if not ifg_path.exists() or not coh_path.exists():
+--
+scripts/assess_coreg_quality.py-70-            with open(meta_path) as f:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/assess_coreg_quality.py-71-                meta = json.load(f)
+scripts/assess_coreg_quality.py:72:            row_offset = meta.get("row_offset_px")
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/assess_coreg_quality.py-73-            col_offset = meta.get("col_offset_px")
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/assess_coreg_quality.py-74-            cc_peak_mean = meta.get("cc_peak_mean")
+--
+scripts/assess_coreg_quality.py-83-        "phase_spatial_std": phase_std,
+scripts/assess_coreg_quality.py-84-        "n_coherent_px":    int(coherent.sum()),
+scripts/assess_coreg_quality.py:85:        "row_offset_px":    row_offset,
+scripts/assess_coreg_quality.py-86-        "col_offset_px":    col_offset,
+scripts/assess_coreg_quality.py-87-        "cc_peak_mean":     cc_peak_mean,
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-1-"""
+scripts/patch_coreg_meta.py:2:Patch coreg_meta.json files with FiLM conditioning fields missing from
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-3-the original preprocess_pairs.py output.
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-4-
+scripts/patch_coreg_meta.py:5:Adds four fields to each coreg_meta.json:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-6-  incidence_angle_deg  — mean of ref+sec incidence angles
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-7-  mode                 — always "SL" (Capella Spotlight)
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-13-Usage
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-14------
+scripts/patch_coreg_meta.py:15:python scripts/patch_coreg_meta.py \\
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-16-    --pairs_dir data/processed/pairs \\
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-17-    --manifest  data/manifests/hawaii_pairs.parquet
+--
+scripts/patch_coreg_meta.py-33-def parse_args() -> argparse.Namespace:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-34-    p = argparse.ArgumentParser(
+scripts/patch_coreg_meta.py:35:        description="Patch coreg_meta.json with FiLM conditioning fields.",
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-36-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-37-    )
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-77-
+scripts/patch_coreg_meta.py-78-    for pair_dir in pair_dirs:
+scripts/patch_coreg_meta.py:79:        meta_path = pair_dir / "coreg_meta.json"
+scripts/patch_coreg_meta.py-80-        if not meta_path.exists():
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-81-            continue
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-102-        n_patched += 1
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-103-
+scripts/patch_coreg_meta.py:104:    log.info("Patched %d / %d coreg_meta.json files (%d not in manifest)",
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-105-             n_patched, n_total, n_missing)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/patch_coreg_meta.py-106-
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-121-    best_pd, best_bp = None, 0.0
+scripts/plot_dem_comparison.py-122-    for pd_dir in pair_dirs:
+scripts/plot_dem_comparison.py:123:        meta_p = pd_dir / "coreg_meta.json"
+scripts/plot_dem_comparison.py-124-        if not meta_p.exists():
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-125-            continue
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-171-            _corners   = geocode_patch_corners(
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-172-                _ext_meta,
+scripts/plot_dem_comparison.py:173:                patch_row        = int(best_meta["patch_row_ref"]),
+scripts/plot_dem_comparison.py:174:                patch_col        = int(best_meta["patch_col_ref"]),
+scripts/plot_dem_comparison.py:175:                patch_size       = int(best_meta.get("patch_size", 4096)),
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-176-                terrain_height_m = _h_terrain,
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-177-            )
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-188-    seen_bboxes = set()
+scripts/plot_dem_comparison.py-189-    for pd_dir in pair_dirs:
+scripts/plot_dem_comparison.py:190:        meta_p = pd_dir / "coreg_meta.json"
+scripts/plot_dem_comparison.py-191-        if not meta_p.exists():
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_comparison.py-192-            continue
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-18-    --out_dir data/processed/AOI_000 \\
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-19-    --max_pairs 100 \\
+scripts/preprocess_pairs.py:20:    --patch_size 4096 \\
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-21-    --n_workers 4
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-22-
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-226-    -------
+scripts/preprocess_pairs.py-227-    dict with keys:
+scripts/preprocess_pairs.py:228:        row_offset_px           float  weighted-mean row shift
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-229-        col_offset_px           float  weighted-mean col shift
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-230-        cc_peak_mean            float  mean CC score of accepted patches
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-236-    """
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-237-    H, W = ref.shape
+scripts/preprocess_pairs.py:238:    patch_size = max(64, int(max(H, W) * patch_frac))
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-239-
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-240-    # Grid centres at evenly-spaced positions, avoiding the outer 20% of each axis
+--
+scripts/preprocess_pairs.py-247-    for rf in row_frac:
+scripts/preprocess_pairs.py-248-        for cf in col_frac:
+scripts/preprocess_pairs.py:249:            r0 = int(rf * H) - patch_size // 2
+scripts/preprocess_pairs.py:250:            c0 = int(cf * W) - patch_size // 2
+scripts/preprocess_pairs.py:251:            r0 = max(0, min(r0, H - patch_size))
+scripts/preprocess_pairs.py:252:            c0 = max(0, min(c0, W - patch_size))
+scripts/preprocess_pairs.py:253:            r1, c1 = r0 + patch_size, c0 + patch_size
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-254-
+scripts/preprocess_pairs.py-255-            patch_r = ref[r0:r1, c0:c1]
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-271-        dr, dc, score = estimate_offset_cc(ref, sec, upsample_factor)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-272-        return {
+scripts/preprocess_pairs.py:273:            "row_offset_px": dr, "col_offset_px": dc,
+scripts/preprocess_pairs.py-274-            "cc_peak_mean": score, "cc_peak_min": score,
+scripts/preprocess_pairs.py-275-            "n_patches_ok": 1, "offset_row_std": 0.0, "offset_col_std": 0.0,
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-315-
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-316-    return {
+scripts/preprocess_pairs.py:317:        "row_offset_px":            mean_dr,
+scripts/preprocess_pairs.py-318-        "col_offset_px":            mean_dc,
+scripts/preprocess_pairs.py-319-        "cc_peak_mean":             float(scores_ok.mean()),
+--
+scripts/preprocess_pairs.py-407-    raw_dir: Path,
+scripts/preprocess_pairs.py-408-    out_dir: Path,
+scripts/preprocess_pairs.py:409:    patch_size: int,
+scripts/preprocess_pairs.py-410-    looks_range: int,
+scripts/preprocess_pairs.py-411-    looks_azimuth: int,
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-444-    h_ref, w_ref = get_slc_shape(tif_ref)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-445-    h_sec, w_sec = get_slc_shape(tif_sec)
+scripts/preprocess_pairs.py:446:    ps = patch_size
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-447-    row_r = max(0, h_ref // 2 - ps // 2)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-448-    col_r = max(0, w_ref // 2 - ps // 2)
+--
+scripts/preprocess_pairs.py-461-    try:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-462-        result = estimate_offset_grid(slc_ref, slc_sec, n_grid=coreg_n_grid, upsample_factor=10)
+scripts/preprocess_pairs.py:463:        dr = result["row_offset_px"]
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-464-        dc = result["col_offset_px"]
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-465-        coreg_stats = result
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-512-    # Save coregistration metadata
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-513-    import json
+scripts/preprocess_pairs.py:514:    with open(pair_dir / "coreg_meta.json", "w") as f:
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-515-        json.dump({
+scripts/preprocess_pairs.py-516-            "id_ref":              id_ref,
+--
+scripts/preprocess_pairs.py-520-            "q_score":             float(row.get("q_score", 0)),
+scripts/preprocess_pairs.py-521-            "bperp_m":             float(row.get("bperp_m", 0)) if "bperp_m" in row.index else None,
+scripts/preprocess_pairs.py:522:            "row_offset_px":       dr,
+scripts/preprocess_pairs.py-523-            "col_offset_px":       dc,
+scripts/preprocess_pairs.py:524:            "patch_size":          ps,
+scripts/preprocess_pairs.py:525:            "patch_row_ref":       row_r,
+scripts/preprocess_pairs.py:526:            "patch_col_ref":       col_r,
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-527-            # Coregistration quality metrics (multi-patch grid)
+scripts/preprocess_pairs.py-528-            "cc_peak_mean":        coreg_stats.get("cc_peak_mean",  None),
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-551-                        "Set 1 to use single centre patch (legacy).")
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-552-    p.add_argument("--dinc_max", type=float, default=2.0, help="Max Δinc filter (deg)")
+scripts/preprocess_pairs.py:553:    p.add_argument("--patch_size", type=int, default=4096, help="SLC patch size (pixels)")
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-554-    p.add_argument("--looks_range", type=int, default=5, help="Range looks for coherence")
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-555-    p.add_argument("--looks_azimuth", type=int, default=5, help="Azimuth looks for coherence")
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-588-        return process_pair(
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-589-            row, raw_dir, out_dir,
+scripts/preprocess_pairs.py:590:            patch_size=args.patch_size,
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-591-            looks_range=args.looks_range,
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/preprocess_pairs.py-592-            looks_azimuth=args.looks_azimuth,
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_nmad_extended.py-109-            print(f"  [{i+1}/{len(pair_dirs)}]", flush=True)
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_nmad_extended.py-110-
+scripts/plot_dem_nmad_extended.py:111:        meta_p = pd_dir / "coreg_meta.json"
+scripts/plot_dem_nmad_extended.py-112-        if not meta_p.exists():
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_dem_nmad_extended.py-113-            continue
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_insar_pipeline.py-131-    best_pd, best_bp, best_m = None, 0.0, None
+scripts/plot_insar_pipeline.py-132-    for d in sorted(PAIRS_DIR.iterdir()):
+scripts/plot_insar_pipeline.py:133:        mp = d / "coreg_meta.json"
+scripts/plot_insar_pipeline.py-134-        if not mp.exists():
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_insar_pipeline.py-135-            continue
+--
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_insar_pipeline.py-162-        corners   = geocode_patch_corners(
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_insar_pipeline.py-163-            ext_meta,
+scripts/plot_insar_pipeline.py:164:            patch_row        = int(meta["patch_row_ref"]),
+scripts/plot_insar_pipeline.py:165:            patch_col        = int(meta["patch_col_ref"]),
+scripts/plot_insar_pipeline.py:166:            patch_size       = int(meta.get("patch_size", 4096)),
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_insar_pipeline.py-167-            terrain_height_m = h_terrain,
+/scratch/gdemil24/Learning-Assisted-InSAR-DEM-Enhancement/scripts/plot_insar_pipeline.py-168-        )

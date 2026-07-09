@@ -1,0 +1,659 @@
+
+===== PAGE 30 =====
+ 
+25 
+ 
+d) 
+ 
+ 
+Figure 7. (continued) The spatial distribution of the monthly (left) and the annual (right) average 
+number of days with advisories issued for water scarcity (d) in the period 2011-2020. 
+Note the different scales of the colour bars. 
+ 
+appear in Kalmar in June and then spread towards the inland parts of southern Sweden, 
+Värmland, Göteborg and Bohuslän in July.   
+The risk of water scarcity in watercourses (groundwater is excluded in this report, see 
+section 2) mainly appeared in central and southern Sweden (Figure 7d) from June to 
+December. Compared to northern Sweden, central and southern Sweden are more likely 
+to experience low flows, in particular, the south-eastern districts. Södermanland, 
+Östergötland and Kalmar appear as especially risk-prone regions where the number of 
+day
+s with issued advisories exceeded 25 days per month during July and August and 
+above 119 days per year. 
+5.2 Warnings and advisories for multiple hazards 
+5.2.1 Multi-hazard metrics for double WA combinations 
+A case when either two warnings, two advisories or one warning and one advisory have 
+been issued on the same day in the same district will hereafter be generally denoted a 
+“double WA”. In this section, the multi-hazard metrics defined in section 0, i.e. 
+NumDDt12, NumDayst12, NumDistricst12, AvgDistrictst12 (in the following used without 
+the subscript), are summarized in Tablkes 7 and 8 for all double WA combinations. 
+The values of the metric, NumDD, reflecting how common the different WA 
+combinations are overall, are shown above the diagonal in Table 7. If first looking only at 
+combinations of two warnings (i.e. inside the highlighted box in the top left part of Table 
+7
+), the most common combinations include high ocean level, together with strong wind 
+gusts (390 occasions), heavy snowfall (249) or high river flow (158). Also, high river 
+flow in combination with strong wind gusts (177) and heavy snowfall (155) are common 
+combinations, followed by heavy snowfall and strong wind gusts (100) and heavy rainfall 
+and high river flow (93). 
+When including also advisories in the analysis, the numbers increase substantially and the 
+most common combinations include forest fire, together with either water scarcity (2463 
+occasions) or high temperature advisory (1825). Also, the combination of forest and 
+grassland fire is worth mentioning, with 375 occasions. The most common combinations 
+of one warning and one advisory are high river flow and grassland fire (761) and high 
+temperature (W) and water scarcity (251). 
+
+===== PAGE 31 =====
+ 
+ 26 
+ 
+Next, we look at metric NumDays, that indicates how many days in total the WA 
+combination happened anywhere in Sweden. The values are given below the diagonal in 
+Table 7. When considering only warnings, the same combinations as for NumDD stand 
+out, i.e. high ocean level together with strong wind gusts (165 days, i.e. on average ~2 
+weeks per year during the 10-year study period), heavy snowfall (108) or high river flow 
+(80). The combination of warning and advisory issued on most days was high 
+temperature (W) together with forest fire (42), followed by high river flow and grassland 
+fire (178). For two advisories, the combination of forest fire and water scarcity had the 
+highest number (283). 
+The metric NumDistricts, presented above the diagonal in Table 8, shows how many out 
+of the 40 districts that experienced the WA combination sometime during 2011-2020. 
+When considering only warnings (i.e. the values inside the highlighted box in the top left 
+part of Table 8), the highest number of districts (31) is found for the combination of 
+heavy snowfall and strong wind gusts. More than half of all districts have also 
+experienced high river flow in combination with either heavy snowfall (26 districts), 
+strong wind gusts (24) or heavy rainfall (23).  
+Concerning combinations of one warning and one advisory, more than 30 districts (i.e. 
+>75% of all districts) have experienced grassland fire together with either heavy snowfall 
+(34 districts) or high river flow (33), and forest fire together with either thunder (32) or 
+high temperature (W) (34) (Table 8). Looking at only advisories, 38 districts, i.e. virtually 
+all of Sweden, have experienced the combination of high temperature (W) and forest fire. 
+Other notable combinations are forest fire and grassland fire (36 districts) and water 
+scarcity together with either high temperature (W) (33) or forest fire (33) (Table 8). 
+Finally, the metric AvgDistricts, shows the number of districts affected when this WA 
+combination is active, i.e. it can be seen as a measure of the spatial extension of the 
+multiple hazard (Table 8, below diagonal). When only warnings are involved, more than 
+three districts are generally affected for the combination of high river flow and strong 
+wind gusts (3.8 districts) and the combination of thunder and high temperature (3.5) (the 
+latter is however an unusual combination that only occurred seven times during the study 
+period; table 8). Several combinations generally affect more than two regions (Table 8). 
+ When including also advisories, the combination of forest fire and high temperature (A) 
+stands out with 13 districts (i.e. almost 1/3 of Sweden) typically affected on days when 
+this combination is active. High values are also found for the combinations of water 
+scarcity together with either high temperature (A) (9.9) or forest fire (8.7). High 
+temperature (W) in combination with water scarcity (8.1) and high temperature (A) (5.5) 
+are the most notable combinations of one warning and one advisory, and also the 
+combination of high river flow and grassland fire generally affect more than four districts 
+(4.3). 
+5.2.2 Spatio-temporal analysis of multiple hazards 
+To identify the districts or regions that are most prone to the risk of multiple hazards, we 
+counted the co-occurrence of different warnings and advisories issued on the same day in 
+the same district. By far, the most common situation is to have two overlapping WAs on 
+the same day in the same district, i.e. a double WA. However, several cases of three 
+overlapping WAs (“triple WA”) was found and even a few cases of four overlapping 
+WAs (“quadruple WA”). The total number of days with triple WA reaches >20 in the 
+southwestern districts, with the most common combination being high river flow, high 
+ocean level and strong wind gusts. These rare triple and quadruple WAs are further 
+described in Appendix C.  
+
+===== PAGE 32 =====
+27 
+ 
+Table 7.  A summary of the overlap between all “double WAs” during 2011-2020. Above diagonal: NumDD, i.e. the total number of occurrences of this combination. Below 
+diagonal: NumDays, i.e. the total number of days when this combination occurs in at least one district. Bold text = warnings; normal text = advisories. 
+ 
+ 
+High 
+lake 
+level 
+High 
+river 
+flow 
+High 
+ocean 
+level 
+Strong 
+wind 
+gust 
+Heavy 
+snowfall 
+Heavy 
+rainfall 
+Thunder High 
+temp. 
+(W) 
+Grassland 
+fire  
+Forest 
+fire  
+Water 
+scarcity 
+High 
+temp. 
+(A) 
+ 
+High lake level  72 0 0 0 0 0 0 13 4 0 0 
+NumDD: total no. of overlaps in all days and districts. 
+High river flow 46  158 177 155 93 1 0 761 42 4 10 
+High ocean level 0 80  390 249 8 0 0 13 9 51 0 
+Strong wind gust 0 47 165  100 17 0 0 64 20 66 0 
+Heavy snowfall 0 65 108 47  0 0 0 120 0 15 0 
+Heavy rainfall 0 39 4 7 0  5 0 5 41 27 1 
+Thunder 0 1 0 0 0 2  7 1 115 38 25 
+High temp. (W) 0 0 0 0 0 0 2  0 423 251 116 
+Grassland fire  13 178 5 17 35 3 1 0  375 55 19 
+Forest fire  4 26 6 7 0 22 39 42 93  2463 1825 
+Water scarcity 0 2 34 20 9 11 13 31 15 283  793 
+High temp. (A) 0 5 0 0 0 1 10 21 8 140 80  
+ NumDay: total no. of days when overlap occurs in at least one district.  
+ 
+
+===== PAGE 33 =====
+ 
+ 28 
+Table 8. A summary of the overlap between all “double WAs” during 2011-2020. Above diagonal: NumDistricts, i.e. the total no. of districts when overlap occurs on at least 
+one day. Below diagonal: AvgDistricts, i.e. the average no. of districts when overlap occurs in at least one district. Bold text = warnings; normal text = advisories. 
+ 
+ 
+High 
+lake 
+level 
+High 
+river 
+flow 
+High 
+ocean 
+level 
+Strong 
+wind 
+gust 
+Heavy 
+snowfall 
+Heavy 
+rainfall 
+Thunder High 
+temp. 
+(W) 
+Grassland 
+fire  
+Forest 
+fire  
+Water 
+scarcity 
+High 
+temp. 
+(A) 
+ 
+High lake level  8 0 0 0 0 0 0 1 1 0 0 
+NumDistricts: total no. of districts when overlap occurs 
+on at least one day.  
+High river flow 1.6  9 24 26 23 1 0 33 10 2 4 
+High ocean level 0 2  16 16 4 0 0 8 5 7 0 
+Strong wind gust 0 3.8 2.4  31 9 0 0 25 11 22 0 
+Heavy snowfall 0 2.4 2.3 2.1  0 0 0 34 0 7 0 
+Heavy rainfall 0 2.4 2 2.4 0  5 0 4 16 10 1 
+Thunder 0 1 0 0 0 2.5  7 1 32 22 20 
+High temp. (W) 0 0 0 0 0 0 3.5  0 34 27 31 
+Grassland fire  1 4.3 2.6 3.8 3.4 1.7 1 0  36 15 13 
+Forest fire  1 1.6 1.5 2.9 0 1.9 2.9 10.1    4  33 38 
+Water scarcity 0 2 1.5 3.3 1.7 2.5 2.9 8.1 3.7 8.7  33 
+High temp. (A) 0 2 0 0 0 1 2.5 5.5 2.4 13 9.9  
+ AvgDistricts: average no. of districts when overlap occurs in at least one district.   
+
+===== PAGE 34 =====
+29 
+ 
+Cases of double warnings occurred in every month but most frequently in winter 
+(December-January) and least frequently in June (Figure 8a). For the risk-prone districts 
+along the west coast the combination of high ocean level and wind gusts is the most 
+common double warning, followed by the combination of high ocean level and high river 
+flow. For the risk-prone districts along the north-east coast the most common double 
+warning is again the high ocean level but with heavy snowfall, followed by the 
+combination of high ocean level and strong wind gusts. 
+The cases of double advisories often occurred from April to October with a high 
+frequency in summer. The hotspot regions appear to be south-eastern Sweden (Figure 
+8b). The most common combination is water scarcity and forest fire, followed by high 
+temperature and forest fire. Both combinations are likely to occur during July and August.  
+The annual average number of days with combinations of one warning and one advisory 
+ranged from up to 22 in southwestern Sweden (i.e., Bohuslän and Göteborg, Halland and 
+Skåne utom Österlen) to a few single days in other districts (Figure 8c). Cases are found 
+in every month but with a high frequency in southern Sweden in summer (June-August) 
+and in northern Sweden in May. Districts along the north-east coast (i.e., Västerbottens 
+kustland and Norrbottens kustland) experienced ~18 days per year. The most common 
+combination in the north is high river flow and grassland fire, followed by high 
+temperature (warning) and forest fire in the south.  
+6 Hydrology-related multiple hazards 
+In this section we will focus on the risk of multiple natural hazards, i.e. double WAs, 
+from a hydrological perspective, using the multi-hazard metrics listed in section 4: 
+NumDD, NumDays, NumDistricts and AvgDistricts. We consider both high flows and 
+low flows from different perspectives and three combinations were selected for in-depth 
+analysis: 
+• Two warnings: high river flow combined with heavy rainfall. This combination 
+is of particular interest due to the increased likelihood of heavy rainfall under 
+the changing climate. Rainfall might occur as an independent event coupled 
+with extended periods of high river flow and finally cause a combination of 
+pluvial and fluvial flooding. 
+• One warning and one advisory: high river flow combined with grassland fire. 
+This was selected primarily as it is the most common combination of one 
+warning and one advisory according to NumDD (Table 7). Furthermore, it is a 
+somehow unexpected combination as it intuitively represents a situation with 
+both wet and dry conditions at the same time. 
+• Two advisories: water scarcity combined with forest fire. This combination 
+stands out very clearly as the most common combination when all WAs are 
+considered, with almost 2500 occasions (i.e., NumDD) registered (Table 7). 
+This is likely due to long period of water scarcity and large affected areas. 
+Water scarcity has come into particular focus in recent years due to the 
+droughts in 2016 and 2018. 
+6.1 High river flow and heavy rainfall 
+Compared to the other double WAs, the combination of high river flow and heavy rainfall 
+shows a relatively large number of affected regions in terms of both NumDistricts (23) 
+and AvgDistricts (2.4) (Table 8). Also, the overall occurrence was relatively high with 
+NumDD=93 and there were 39 days (i.e. NumDays) when this double WA was active in 
+at least one district (Table 7).  
+ 
+
+===== PAGE 35 =====
+ 
+ 30 
+a) 
+  
+b) 
+  
+c) 
+  
+Figure 8.  The spatial distribution of the monthly (left) and the annual (right) average number of 
+days with different types of double WA in the period 2011-2020: two warnings (a), two 
+advisories (b) and one warning and one advisory (c). Note the different scales of the 
+colour bars. 
+ 
+
+===== PAGE 36 =====
+ 
+31 
+ 
+May to October is the main period when this double WA occurred from 2011 to 2020. As 
+seen from Figure 9, the frequency of this combination is very limited, <1 day per month. 
+The occurrences appeared in different districts and in different months, except in January, 
+March, April, June and December when no any occurrence was found. Overall, the 
+districts with relatively high risk are mainly located (1) along the west coast in October, 
+(2) in central Sweden in May and (3) in northern Sweden in July. 
+A period with the combination of high river flow warning and heavy rainfall warning in 
+2014 is given as an example in Appendix D (see Figure D1). 
+ 
+Figure 9.  The spatial distribution of the monthly (left) and the annual (right) average number of 
+ 
+days with the combination of high river flow and heavy rainfall warning in the period 
+2011-2020. 
+6.2 High river flow and grassland fire 
+During 2011-2020 there were in total 761 occurrences of the combination high river flow 
+warning and grassland fire advisory (NumDD). In terms of NumDays, 178 days 
+experienced the WA combination in at least one district (Table 7). Concerning the 
+corresponding influencing areas, on average 4.3 districts (i.e., AvgDistricts) experienced 
+the WA combination (i.e. ~10% of all districts) (Table 8). It is found that in 2018, the 
+year with record-high number of issued wildfire advisories and second record-high 
+number of issued high river flow warnings, the number of days when high river flow 
+warnings and fire advisories co-occurred reached the highest value of 35 days (i.e., 
+approximately 20% of all days with this double WA in the analysis period). The 
+corresponding affected area reached 7.9 districts which is almost double the average 
+affected districts in the same period (not shown here).  
+This double WA occurs from February to June, from southern Sweden with a relatively 
+high risk in March (~2 days on average), and then spreads northward to 
+northern Sweden. 
+The highest risk appeared in May with up to seven days per month for the coastal district 
+in Norrbotten. In terms of its affected area, April stands out as the month in which almost 
+all of Sweden has experienced this double WA, except in the southwestern regions and in 
+the mountain chain (Figure 10).  
+An example showing the combination of high river flow warning and heavy rainfall 
+warning in 2014 is given in Appendix D (see Figure D2). 
+
+===== PAGE 37 =====
+ 
+ 32 
+ 
+Figure 10. The spatial distribution of the monthly (left) and the annual (right) average number of 
+days with the combination of high river flow warning and grassland fire advisory in the 
+period 2011-2020. 
+6.3 Water scarcity (low river flow) and forest fire 
+Water scarcity is a new advisory recently added to the forecast system and only four years 
+of data were therefore available for this study (2017-2020). Nevertheless, in combination 
+with forest fire it represents the most common double WA according to NumDD (Table 
+7). Out of the 1461 days in the 4-year period, on 283 days this double WA was active in 
+at least one district (i.e., NumDay in Table 7). This WA combination has affected 33 
+districts (NumDistricts, Table 8) in the study period, with on average almost nine districts 
+being affected when the double WA is active in at least one district (AvgDistricts, Table 
+8), which makes this one of the most spatially extensive WA combinations. 
+As seen from Figure 11, the overlaps between water scarcity and forest fire normally 
+starts from June and lasts till October, peaking during the summer months (i.e., June-
+August). July stands out as the month when this double WA has been active in most of 
+Sweden, except in the mountain chain and in the very north. In particular the districts in 
+south-eastern Sweden are a hot-spot where the frequency of occurrence exceeds half the 
+month in July and August.  
+Figure D3 in Appendix D shows an event with combined water scarcity and forest fire 
+advisories in 2018. 
+ 
+7 Summary and conclusions 
+Warnings and advisories (WA) issued by SMHI in the period 2011-2020 have been 
+compiled and analyzed. The data preparation included digitization and various 
+components of quality control and assurance. The analysis was simplified by converting 
+the recorded WAs to an indicator (binary) matrix format on day and district scale. Thus, 
+even if a WA was active for only a part of the day or in a part of the district, it was 
+assigned to that (whole) day and that (whole) district. The investigation included both 
+single-hazard analysis, by investigating the occurrence of single WAs, and multi-hazard 
+analysis, by investigating mainly the occurrence of combinations of two WAs (double 
+WA). We have focused primarily on hydrological WAs.   
+The main findings for single hazards with focus on hydrology include: 
+• Concerning the overall number of affected districts and days, NumDD, warnings 
+of high river flow and heavy snowfall, were the most common warnings, with on  
+
+===== PAGE 38 =====
+ 
+33 
+ 
+  
+Figure 11. The spatial distribution of the monthly (left) and the annual (right) average number of 
+days with the combination of forest fire and water scarcity advisory in the period 2011-
+2020. 
+ 
+average more than 400 warnings issued per year. Also, warnings of strong wind 
+gusts and high ocean level were issued more than 200 times per year on average. 
+• Advisories, except high temperature advisories (NumDD = 299), were more 
+frequently issued when compared with the different types of warnings, with on 
+average ≥1000 advisories issued per year (i.e., 1746 times for water scarcity, 
+1386 times for forest fire and 966 times for grassland fire).   
+• From December to March, high river flow warnings were mainly issued for 
+districts in southern Sweden with a relatively high number along the south and 
+west coasts. From April on, the same type of risk spread towards the north, where 
+high river flow warnings occurred much more often in comparison with the rest 
+of the country and reached the annual peak from May to July in connection with 
+the spring flood. For the rest of the year high flow warnings were issued but with 
+fewer numbers in general.   
+• Heavy rainfall warnings mainly occurred from May to October. July-October is 
+the period in which the majority of the country is affected by heavy rainfall. 
+Higher-than-normal number of warnings were issued particularly in August and 
+particularly for districts along the east coast in northern Sweden and the west 
+coast in southern Sweden. 
+• Heavy snowfall warnings were often issued with on average 1-2 days in at least 
+one district per month from November to March, in particular in December (e.g., 
+Västernorrland and the coastal area of Västerbotten with >5 warning days on 
+average) and January (e.g., central part of Sweden with >4 warning days on 
+average). 
+• The risk of water scarcity in watercourses mainly appeared in the central and 
+southern part of Sweden from June to December. In particular, the south-eastern 
+districts Södermanland, Östergötland and Kalmar appear as more risk prone 
+regions where the number of days with issued advisories reached high during 
+July and August.  
+• Year 2018 was the year with a record-high number of issued forest fire 
+advisories, water scarcity advisories and high temperature warning. It was also 
+
+===== PAGE 39 =====
+ 
+ 34 
+the year with the second highest number of issued high river flow warnings, 
+likely due to relatively heavy snowfall in winter 2017-2018.  
+The main findings for double (overlapping) WAs are summarized in the following, with 
+focus on hydrology and warnings: 
+• Concerning two overlapping warnings, the districts along the west coast (i.e., 
+Bohuslän and Göteborg, Halland and Skåne utom Österlen) and the north-east 
+coast (i.e., Västerbottens kustland and Norrbottens kustland) were most affected, 
+in particular during winter (December-February).  
+• The most common combination according to metrics NumDD and NumDays was 
+high ocean level together with strong wind gusts. The two single warnings 
+included showed fairly high inter-annual variability.  
+• The main warning combination including hydrology was that of high river flow 
+and strong wind gusts, which showed up high in all metrics. The most affected 
+districts are located along the west coast in southern Sweden, where the 
+combination occurred up to once per month in in February and December. 
+• Concerning the combination of one warning and one advisory, the districts along 
+the south-eastern coast in July and August were found most affected, followed by 
+the districts along the north-east coast. High river flow warning combined with 
+grassland fire advisory ia a hydrology-related multiple hazard that came up high 
+in all metrics. 
+• The combination between water scarcity and forest fire stands out as the most 
+frequent combination of two advisories.  
+The overlap between high river flow and heavy rainfall warnings came up high in terms 
+of affected districts (NumDistricts and AvgDistricts) and thus normally affected large 
+areas. It appeared from May to October but with low frequency, less than day per month. 
+It is especially “hydrologically problematic”, as when high river flow coincides with 
+heavy rainfall, simultaneously or successively, the infrastructure may be damaged or 
+corresponding preparedness is inadequate in case the combined risk is overlooked. Three 
+regions were found associated with relatively high risk: (1) the western coastal districts in 
+October, (2) central Sweden in May and (3) northern Sweden in July. 
+Also, the combination between high river flow and high ocean level deserves to be 
+mentioned and described as a notable warning combination, as it comes up quite high in 
+terms of both NumDD and NumDays. It is also hydrologically problematic in coastal 
+regions, where total water levels may be influenced by both processes. The consideration 
+of this type of double WA is important for designing flood protection infrastructure and 
+drainage in affected regions. In Sweden, it mainly occurs in the districts along the west 
+and south coast (October to March), the south-east coast (January and February) and the 
+north-east coast (June, October and November). The results show that Halland, Bohuslän 
+and Göteborg in Västra Götaland and Skåne län utom Österlen were the most influenced 
+with a ferquency >4 times/year. Especially, in February in Skåne län utom Österlen the 
+monthly occurrence is almost twice per month.  
+The double WA of high river flow warning and grassland fire advisory starts from 
+southern Sweden with relatively high risk in March and then spreads northward to 
+northern Sweden. The highest risk appeared in May, with up to seven days per month for 
+the coastal district in Norrbotten. April is a hotspot month, as nearly all of Sweden has 
+experienced this double WA in April, except in the south-western regions and in the 
+mountain chain. This WA was found to often affect large areas and it is likely to occur 
+due to snow melt from February to June.  
+As mentioned above, water scarcity shows a strong link to the forest fire hazard with 
+frequent overlap. This combination of advisories normally starts in June and ends by 
+
+===== PAGE 40 =====
+ 
+35 
+ 
+October, peaking during the summer months (June-August). July stands out as the month 
+when this double WA were active in most of Sweden, except in the mountain chain and in 
+the very north. In particular the districts in south-eastern Sweden are a hotspot where the 
+frequency of occurrence exceeds half the month in July and August.  
+To conclude, exploring the spatio-temporal distributions of warnings and advisories is a 
+way to identify risk-prone regions and seasons. This may help municipalities and rescue 
+services to make up infrastructure plans and precaution strategies so as to maximize the 
+capability and avoid potential disasters. Furthermore, the results may be used as a basis to 
+identify topics of special interests for different purposes, e.g., acquire a deeper 
+understanding of the involved processes, develop tailored indicators, etc.  
+The results show that high river flow and high ocean level are often one of the single 
+hazards involved in overlapping combinations (double WAs) in a Swedish context. They 
+may co-occur with other single hazards such as strong wind gusts, heavy snowfall, etc., 
+and trigger different kinds of compound events causing a stronger-than-expected impact. 
+Also, more attention should be given to advisories of forest fire and water scarcity, that 
+are frequently issued. 
+As the climate varies naturally from one year to the next, sufficiently long time series 
+(i.e., ≥30 years) are always required in order to capture different kinds of forcing that may 
+have effects on climate system. The limited length of data on warnings and advisories in 
+this study (10 years) means that we cannot draw any firm conclusions in terms of how 
+certain parts of Sweden are affected by different kinds of natural hazards and their 
+combinations, only find indications. Thus, the presented results, e.g. in terms of regional 
+patterns, are to some extent affected by samling uncertainties. 
+Further research is needed confirm the findings in this report as well as to focus on 
+different multiple and/or compound events in order to deepen the knowledge of the 
+underlying physical processes and driving forces. Model data such as ensemble forecasts 
+and climate projection can be used for assessment on different time horizons, aiming at 
+developing early warnings and alerts as well as estimating changes in frequency, severity 
+and seasonality of multiple hazards. We believe such efforts should be a key component 
+in analyses for adaptation towards a climate-proof society. 
+Acknowledgements 
+The authors would like to thank Sara-Sofia Asp, Fredrik Linde and Mats Johansson for 
+helping us collecting data from KEPS database and improving our understanding of 
+issued and recorded warnings and advisories. We also thank Sara-Sofia Asp, Peter Berg 
+and Fredrik Linde, for providing helpful comments on the first version of this report, and 
+Teo Suzuki Olsson for assistance with digitization. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 41 =====
+ 
+ 36 
+References 
+Bergström, S. (1976). Development and Application of a Conceptual Runoff Model for 
+Scandinavian Catchments. SMHI, Reports RHO, 7. 
+Bergström, S. (1992). The HBV model - its structure and applications. SMHI Reports 
+Hydrology RH 4, Norrköping. 
+Gustafsson, V.S., Hjerpe, M., Wiréhn, L., Granberg, T.A., Pilemalm, S. & 
+Waldemarsson, M. (2021). Multipla naturhändelser i Sverige. CARERs rapportserie, 
+Rapport Nr 36, Linköpings universitet. 
+Lindström, G., Johansson, B., Persson, M., Gardelin, M. and Bergström, S. (1997).   
+Development and test of the distributed HBV-96 hydrological model. Journal of 
+Hydrology, Volume 201, Issues 1–4, 272-288, ISSN 0022-1694. 
+https://doi.org/10.1016/S0022-1694(97)00041-3. 
+Lindström G., Pers C., Rosberg J., Strömqvist J., Arheimer B. (2010). Development and 
+testing of the HYPE (Hydrological Predictions for the Envionment) water quality 
+model for different spatial scales, Hydrol. Res., 41(3–4), 295–319. 
+Gardelin, M. (1996). Brandriskprognoser med hjälp av en hydrologisk modell - 
+Slutrapport. FoU-rapport R53-127/96, Statens Räddningsverk, Karlstad.  
+Gardelin, M. (1997). Brandriskprognoser med hjälp av en kanadensisk 
+skogsbrandsmodell. FoU-rapport P21-168/97, Statens Räddningsverk, Karlstad.  
+Gardelin, M. and Sjöö, A. (1999). Realtidsförsök med högupplösta brandriskprognoser. 
+FoU-rapport P21-284/99, Statens Räddningsverk, Karlstad.  
+Gardelin, M. (2001). Brandriskprognoser med hjälp av en skiktad markfuktighetsmodell – 
+vidareutveckling av HBV-modellen. FoU-rapport P21-389/01, Statens Räddningsverk, 
+Karlstad. 
+Suursaar, Ü., Sooäär, J. (2007). Decadal variations in mean and extreme sea level values 
+along the Estonian coast of the Baltic Sea. Tellus (2007), 59A, 249–260. DOI: 
+10.1111/j.1600-0870.2006.00220.x. 
+van Wagner, C.E. (1987). Development and structure of the Canadian Forest Fire 
+Weather Index system, Forestry Technical Report 35, Canadian Forest Service, 
+Ottawa, Canada.  
+Zscheischler, J., Martius, O., Westra, S., Bevacqua, E., Raymond, C., Horton, R.M., van 
+den Hurk, B., Aghakouchak, A., Jézéquel, A., Mahecha, M.D., Maraun, D., Ramos, 
+A.M., Ridder, N.N., Thiery, W., & Vignotto, E. (2020). A typology of compound 
+weather and climate events. Nature Reviews Earth & Environment, 1, 333 - 347. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 42 =====
+ 
+37 
+ 
+APPENDIX A 
+Analysis of durations of single WAs 
+ 
+As described in section 4.1, the WAs extracted from the KEPS system contained short-
+lived, “false” WAs that were just updates of an existing WA and not a new WA. To 
+eliminate as many as possible of the false WAs, it was decided to use a lower “duration 
+threshold” below which a WA is considered false. Figure A1 illustrate how the false WAs 
+influence the distributions (histograms) of single natural hazards’ durations at sub-daily 
+scale. They show the total number of entries in the KEPS outtake 2011-2020 of any class 
+of the type of warning, for durations between 0 and 24 hours. 
+ 
+As the data will be aggregated to a daily scale, the first step is to construct a matrix 
+𝐴𝑡𝑐
+𝑑 (𝑖, 𝑗) of all active warnings of type t and class c on day i in district j, of a duration 
+longer than the duration threshold d. To study the impact of the threshold d, the KEPS 
+outtake was traversed and if the duration of an entry is more than d=0, 1, 2, etc., hours, 
+𝐴𝑡𝑐
+𝑑 (𝑖, 𝑗) is increased by 1 for the districts and days where it was active. Table A1 shows 
+the sum of 𝐴𝑡𝑐
+𝑑 (𝑖, 𝑗) over all days, districts and classes for d=1 to 12 hours.  
+ 
+The analysis then uses the indicator matrix Stc(i,j) (section 4.2.1), which is 1 if 𝐴𝑡𝑐
+𝑑 (𝑖, 𝑗)>0 
+and 0 otherwise. Table A2 shows the sum of Stc(i,j) over all days, districts and classes of 
+each WA type (this is metric NumDD summed over all classes). Some WA types have a 
+large difference between Table A1 and A2, e.g. high river flow has a sum that is almost 
+twice as high in Table A1. This is mainly because those warnings are extended on most 
+days and then produce two active warnings in a day in KEPS, although it is the same 
+warning. 
+ 
+The bars in figure A1 are approximately the difference between two adjacent columns in 
+Table A1 and is more loosely related to the difference between the columns of Table A2. 
+As can be seen in the histograms and Table A2, warnings related to slow processes like 
+high river flow and high temperature are fairly independent of the duration threshold at a 
+sub-daily scale from one or a few hours and up. The meteorological warnings have a 
+much more gradual decay. 
+ 
+To choose a single duration threshold for all WAs means to strike a balance between two 
+risks; on one hand including too many suspicious warnings for types associated with slow 
+processes, and on the other hand excluding too many “true” warnings for short-lived 
+meteorological hazards. From the sums in Table A2, a duration threshold of 2 hours 
+appears to be appropriate as (1) the number of WAs of slow processes stabilizes for 
+longer durations and (2) most of the numbers associated with short-lived WAs have not 
+started to decay sharply. The 2-hour duration threshold was also discussed and agreed 
+with the reviewers of the report, and we believe that the final indicator matrix Stc(i,j) well 
+reflect the spatio-temporal characteristics of only true warnings.  
+
+===== PAGE 43 =====
+ 
+ 38 
+  
+ 
+  
+  
+  
+Figure A1. Histograms of durations of single warnings that were active less than 24 hours. 
+ 
+ 
+ 
+
+===== PAGE 44 =====
+ 
+39 
+ 
+ 
+  
+Figure A2. Histograms of durations of single advisories that were active less than 24 hours. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 45 =====
+40 
+ 
+Table A1. Number of active WAs summed over all days, districts and classes in 2011-2020 (bold text = warnings, normal text = advisory) for different duration thresholds (0-
+12 hours). This is where all warnings in a district each day are summed. 
+ 0 1 2 3 4 5 6 7 8 9 10 11 12 
+Grassland fire 9853 9725 9688 9623 9601 9583 9527 9504 9497 9481 9461 9407 9175 
+Forest fire 14 977 14 943 14 943 14 940 14 939 14 936 14 930 14 909 14 899 14 897 14 879 14 867 14 847 
+High temp. 2096 2096 2096 2096 2096 2094 2094 2094 2094 2094 2094 2094 2094 
+High temp. 525 516 516 516 516 516 516 516 516 516 516 516 516 
+High lake lev. 124 123 123 123 123 123 123 123 123 123 123 123 123 
+High river flow 11 078 10 646 10 572 10 531 10 486 10 480 10 479 10 477 10 477 10 475 10 472 10 469 10 461 
+High ocean lev. 3063 3041 3035 3025 3018 3005 2989 2969 2951 2915 2880 2829 2746 
+Wind gust 3214 3078 2920 2819 2761 2655 2592 2570 2520 2488 2440 2332 2285 
+Snowfall 6343 5979 5682 5258 5059 4880 4683 4527 4384 4205 4122 4004 3911 
+Rainfall 1109 1014 904 847 811 778 757 703 690 672 632 602 566 
+Thunder 752 647 569 480 390 309 286 271 244 235 194 191 188 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

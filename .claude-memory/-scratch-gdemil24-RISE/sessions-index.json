@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "sessionId": "255e69a1-bc62-4390-9f29-29d1f93fc0d4",
+      "fullPath": "/homedir01/gdemil24/.claude/projects/-scratch-gdemil24-RISE/255e69a1-bc62-4390-9f29-29d1f93fc0d4.jsonl",
+      "fileMtime": 1768574816378,
+      "firstPrompt": "look at the project @ml-cloud-opt-thick/ in depth, you can also get the published paper in the folder and lets study the project in detail so that we can work in this project as an extension of the pr…",
+      "messageCount": 7,
+      "created": "2026-01-16T09:12:55.157Z",
+      "modified": "2026-01-16T14:46:56.244Z",
+      "gitBranch": "",
+      "projectPath": "/scratch/gdemil24/RISE",
+      "isSidechain": false
+    },
+    {
+      "sessionId": "3ec7a20d-64e5-4f03-ba60-28a4c43192d2",
+      "fullPath": "/homedir01/gdemil24/.claude/projects/-scratch-gdemil24-RISE/3ec7a20d-64e5-4f03-ba60-28a4c43192d2.jsonl",
+      "fileMtime": 1768214527624,
+      "firstPrompt": "No prompt",
+      "messageCount": 4,
+      "created": "2026-01-12T10:18:10.321Z",
+      "modified": "2026-01-12T10:42:07.475Z",
+      "gitBranch": "",
+      "projectPath": "/scratch/gdemil24/RISE",
+      "isSidechain": false
+    },
+    {
+      "sessionId": "6531ca0a-0d4c-4ca9-ad8b-86d500d42139",
+      "fullPath": "/homedir01/gdemil24/.claude/projects/-scratch-gdemil24-RISE/6531ca0a-0d4c-4ca9-ad8b-86d500d42139.jsonl",
+      "fileMtime": 1768899071746,
+      "firstPrompt": "No prompt",
+      "messageCount": 2,
+      "created": "2026-01-20T08:51:11.610Z",
+      "modified": "2026-01-20T08:51:11.609Z",
+      "gitBranch": "",
+      "projectPath": "/scratch/gdemil24/RISE",
+      "isSidechain": false
+    },
+    {
+      "sessionId": "59e95a9d-3ecf-41e6-8f40-4d125a643f89",
+      "fullPath": "/homedir01/gdemil24/.claude/projects/-scratch-gdemil24-RISE/59e95a9d-3ecf-41e6-8f40-4d125a643f89.jsonl",
+      "fileMtime": 1768925814427,
+      "firstPrompt": "imagine your an expert in deep learning or ML who works in remote sensing or snow hydrology researcher so now let you go @nordic-snow-monitoring/ and exmaine the project to start working on the coding",
+      "messageCount": 49,
+      "created": "2026-01-20T09:33:21.875Z",
+      "modified": "2026-01-20T16:16:54.387Z",
+      "gitBranch": "",
+      "projectPath": "/scratch/gdemil24/RISE",
+      "isSidechain": false
+    }
+  ]
+}
