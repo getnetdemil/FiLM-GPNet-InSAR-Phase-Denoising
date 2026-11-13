@@ -1,5 +1,5 @@
-# datasets and large binary outputs
-data/
+# datasets and large binary outputs (anchored to repo root so configs/data/ stays tracked)
+/data/
 *.tif
 *.tiff
 *.parquet

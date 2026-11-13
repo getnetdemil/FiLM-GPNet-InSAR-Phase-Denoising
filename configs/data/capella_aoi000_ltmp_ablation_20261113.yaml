@@ -1,0 +1,43 @@
+# Data config for JSTARS Table II loss-component ablation sweep on AOI_000 (Hawaii).
+# Points at the full-image pairs dir produced by preprocess_pairs_full_image.py (V5.8),
+# NOT the legacy cropped-patch dir at data/processed/pairs/.
+#
+# Forked from: configs/data/capella_aoi_selection.yaml (2026-11-13)
+# Differences: pairs_dir, pairs_manifest, triplets_manifest updated to the AOI_000
+# full-image products. tile_size / stride / min_coherence / in_channels unchanged.
+#
+# Used by: experiments/enhanced/train_film_unet_ltmp_active_20261113.py
+# Driven by: scripts/run_jstars_ablations_20261113.sh
+
+# Preprocessed pair outputs. We point at the legacy cropped pipeline dir
+# `data/processed/pairs/` because it contains 224 completed AOI_000 Hawaii
+# pairs with 4096x4096 2-band Re/Im `ifg_goldstein.tif` + `coherence.tif` +
+# `ifg_raw.tif`. The newer `AOI000_pairs_full_image/` dir has 539 subdirs but
+# only 4 of them have finished preprocessing — insufficient for ablation
+# training. The L_tmp-active fork accepts either filename convention.
+pairs_dir: data/processed/pairs
+
+# AOI_000 pair manifest (documentation only — train script reads pairs_dir, not this)
+pairs_manifest: data/manifests/hawaii_pairs.parquet
+
+# Hawaii triplet manifest (documentation only — passed via --triplets_manifest CLI)
+triplets_manifest: data/manifests/hawaii_triplets_strict.parquet
+
+# AOI splits — single-AOI, split by date range
+aoi_train: [AOI_000]
+aoi_val:   [AOI_000]
+aoi_test:  [AOI_000]
+# Within AOI_000: 70/15/15 temporal split, train = earliest dates
+temporal_split:
+  train_frac: 0.70
+  val_frac:   0.15
+  # test_frac: 0.15 (remainder, held out)
+
+# Tile settings (unchanged from parent config)
+tile_size: 256
+stride: 128
+min_coherence: 0.15
+
+# Input channels: 2 (Re, Im) or 3 (Re, Im, coherence)
+# L_tmp coh_stack uses channel 2 when in_channels=3.
+in_channels: 3
