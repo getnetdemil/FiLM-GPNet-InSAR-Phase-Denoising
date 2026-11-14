@@ -3,7 +3,7 @@
 **Target paper**: `JSTARS_Journal_Paper/JSTARS_Journal_Paper.tex` (FiLM-GPNet section, joint JSTARS submission)
 **Scope**: Fill the six TBD rows in Table II via controlled leave-one-out training runs on **AOI_000 (Hawaii)**.
 **Authors on this workstream**: Getnet Demil (Oulu), Muhammad Farhan Humayun (Turku).
-**Status**: approved plan, implementation pending.
+**Status**: implementation in flight — sweep #2 running variant 2 of 5 remaining (see §15 Execution Log).
 
 ---
 
@@ -296,3 +296,37 @@ After the sweep completes, the artefacts a reviewer / co-author can inspect:
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-11-13 | Getnet Demil | Initial plan after audit of training loop and loss implementations |
+| 2026-11-13 | Getnet Demil | Fork `train_film_unet_ltmp_active_20261113.py` built; `scripts/run_jstars_ablations_20261113.sh` and `configs/data/capella_aoi000_ltmp_ablation_20261113.yaml` added; pushed to GitHub branch `JSTARS-ablation` (commit `b6c45eb`). |
+| 2026-11-14 | Getnet Demil | Data-path correction: config points at `data/processed/pairs/` (224 legacy Hawaii pairs, 2-band Re/Im `ifg_goldstein.tif`) instead of `AOI000_pairs_full_image/` (only 4 completed pairs). Fork accepts both filename conventions. |
+| 2026-11-14 | Getnet Demil | Epoch registry resolves `id_ref`/`id_sec` from each pair's `coreg_meta.json` (not from `pair_dir.name.split("__")`) because 100 of 224 legacy dir names are truncated at 80 chars. |
+| 2026-11-14 | Getnet Demil | Monkey-patched `temporal_consistency_loss` with a ridge-regularized version inside the fork (λ=1e-3). Original lstsq produced NaN on CUDA for under-determined mini-batch SBAS; ridge eliminates it. Published `physics_losses.py` untouched. |
+| 2026-11-14 | Getnet Demil | Orchestrator reordered (fastest `jstars_abl_no_cls` first for autonomous-window ergonomics) and hardened to continue-on-error so one bad variant does not abort the sweep. |
+| 2026-11-14 | Getnet Demil | Fixed `pd` shadow bug in `main()` (loop variable `for pd in pair_dirs` was shadowing `import pandas as pd`, breaking `pd.read_parquet(args.triplets_manifest)` 50 lines later). Loop var renamed to `pdir`. |
+
+---
+
+## 15. Execution log
+
+Live, append-only record of actual runs. Metrics come from `<run_tag>_training_summary.json`; eval (M1–M5) is deferred until the full sweep completes.
+
+| # | Tag | Status | Start → End (UTC) | Duration | Final train_tmp | Final train_total | Notes |
+|---|-----|--------|-------------------|----------|-----------------|-------------------|-------|
+| 1 | `jstars_abl_no_cls_20261114_0128` | ✅ complete | 23:28 Nov 13 → 05:38 Nov 14 | 6.16 h | 0.0738 | −0.506 | No triplet loader. `_n_tmp_fired: 9369/9369` on every epoch. Clean. |
+| 2 | `jstars_full_tmp_active_20261114_0740` | 🟢 in flight | 05:40 Nov 14 → ~02:30 Nov 15 (est) | ~21 h (est) | 0.0752 @ epoch 4 | −0.437 @ epoch 4 | Anchor row. With triplets (`hawaii_triplets_strict.parquet`, 24,171 triplets → 51,150 triplet-tiles). |
+| 3 | `jstars_abl_no_unc` | ⏳ queued | pending | — | — | — | `--loss_unc 0`, triplets on |
+| 4 | `jstars_abl_no_grd` | ⏳ queued | pending | — | — | — | `--loss_grad 0`, triplets on |
+| 5 | `jstars_abl_no_tmp` | ⏳ queued | pending | — | — | — | `--loss_temporal 0`, triplets on |
+| 6 | `jstars_abl_zero_film` | ⏳ queued | pending | — | — | — | `--zero_film`, triplets on |
+
+Sweep master logs:
+- `logs/jstars_sweep_master_20261113_2328.log` — sweep #1 (variant 1 complete + variant 2 crash evidence)
+- `logs/jstars_sweep_master_20261114_0540.log` — sweep #2 (relaunch, currently in variant 2)
+
+Per-variant CSVs:
+- `logs/jstars_ablation_log_20261113_2328.csv` — variant 1 row
+- `logs/jstars_ablation_log_20261114_0540.csv` — variants 2–6 (will populate as each completes)
+
+Smoke tests (all on 2026-11-13/14, logs under `logs/smoke_test_*`):
+- v1 / v2: `train_tmp=nan` — root cause was lstsq instability on CUDA under-determined mini-batch SBAS
+- v3: `train_tmp=nan` even with production weights — confirmed not a weight issue, it's the solver
+- v4: `train_tmp=0.074` stable over 2 epochs after installing ridge-regularized replacement; cleared to launch sweep

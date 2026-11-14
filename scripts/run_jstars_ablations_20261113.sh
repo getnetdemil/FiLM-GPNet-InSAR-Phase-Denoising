@@ -109,14 +109,19 @@ declare -A VARIANT_FLAGS=(
     [jstars_abl_zero_film]="--zero_film"
 )
 
-# Launch order: anchor first; fastest variant second (sanity); rest after.
+# Launch order: fastest variant FIRST so an unattended ~8h window completes at
+# least one variant; anchor second; rest after in rough cost order.
+# NOTE 2026-11-14: jstars_abl_no_cls completed cleanly on sweep #1 (run
+# jstars_abl_no_cls_20261114_0128, 6.16h, train_tmp=0.074 stable). It is now
+# commented out so subsequent sweep invocations resume from the anchor variant.
+# Re-enable by uncommenting if you want to rerun it.
 ORDER=(
-    jstars_full_tmp_active
-    jstars_abl_no_cls
-    jstars_abl_no_unc
-    jstars_abl_no_grd
-    jstars_abl_no_tmp
-    jstars_abl_zero_film
+    # jstars_abl_no_cls       # ~8h  — DONE 2026-11-14 (ckpt jstars_abl_no_cls_20261114_0128)
+    jstars_full_tmp_active    # anchor, ~17h (full objective, L_tmp now active)
+    jstars_abl_no_unc         # ~17h
+    jstars_abl_no_grd         # ~17h
+    jstars_abl_no_tmp         # ~17h
+    jstars_abl_zero_film      # ~17h
 )
 
 PYTHON_RUN=(conda run --prefix "$ENV_PREFIX" --no-capture-output python -u)
@@ -147,11 +152,21 @@ run_variant() {
     fi
 
     # Run training. We rely on train script writing to logs/<run_tag>.log itself.
-    "${PYTHON_RUN[@]}" "$TRAIN_SCRIPT" $flags --run_name "$tag"
+    # Use `|| true` wrapper so a training failure of one variant does NOT abort
+    # the whole sweep — the checkpoint check below will still catch it and log
+    # an ERR row to the CSV. Critical for unattended overnight runs.
+    local train_rc=0
+    "${PYTHON_RUN[@]}" "$TRAIN_SCRIPT" $flags --run_name "$tag" || train_rc=$?
 
     end_s=$(date -u +%s)
     end_iso=$(date -u +%Y-%m-%dT%H:%M:%SZ)
     dur_h=$(python3 -c "print(round((${end_s}-${start_s})/3600.0, 2))")
+
+    if [[ $train_rc -ne 0 ]]; then
+        echo "[$tag] ERROR: training failed with exit $train_rc"
+        echo "$tag,$start_iso,$end_iso,$dur_h,FAIL,FAIL,ERR,ERR,ERR,ERR,TRAIN_RC=$train_rc" >> "$CSV"
+        return 0   # continue to next variant
+    fi
 
     # Locate the checkpoint the train script just wrote
     local ckpt_dir ckpt
@@ -159,13 +174,13 @@ run_variant() {
     if [[ -z "$ckpt_dir" ]]; then
         echo "[$tag] ERROR: could not locate checkpoint dir matching ${tag}_*"
         echo "$tag,$start_iso,$end_iso,$dur_h,MISSING,MISSING,ERR,ERR,ERR,ERR,MISSING" >> "$CSV"
-        return 1
+        return 0   # continue to next variant
     fi
     ckpt="${ckpt_dir}/$(basename "$ckpt_dir")_final.pt"
     if [[ ! -f "$ckpt" ]]; then
         echo "[$tag] ERROR: expected final checkpoint $ckpt not found"
         echo "$tag,$start_iso,$end_iso,$dur_h,$ckpt_dir,MISSING,ERR,ERR,ERR,ERR,MISSING" >> "$CSV"
-        return 1
+        return 0   # continue to next variant
     fi
 
     # ── Optional eval (M1/M2/M4/M5) ──

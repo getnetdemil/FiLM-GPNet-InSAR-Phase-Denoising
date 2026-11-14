@@ -80,7 +80,57 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from models.film_unet import FiLMUNet
+from losses import physics_losses as _physics_losses
 from losses.physics_losses import InSARLoss, LossWeights, PhysicsLossInputs
+
+
+# ─── Stable L_tmp replacement (ridge-regularized) ─────────────────────────────
+#
+# The published `temporal_consistency_loss` in `src/losses/physics_losses.py`
+# uses `torch.linalg.lstsq`. On CUDA with under-determined mini-batch SBAS
+# systems (P pairs << T epochs touched by the batch), the solution x* can have
+# unbounded null-space components → NaN propagates to the residual and then
+# to the gradient. Observed in two smoke tests (weight=1.0 and weight=0.2):
+# `train_tmp=nan` on epoch 1.
+#
+# We fix it HERE in the fork — not in the published module — by swapping the
+# implementation at import time. The semantics match: residual = phi - A x*
+# minimised under A (P, T) and phi (P, N), just regularised by λ·I on x.
+#
+def _stable_temporal_consistency_loss(phi_hat, A, coh_weights=None,
+                                      lambda_reg: float = 1e-3):
+    """Ridge-regularised SBAS residual. Numerically stable where lstsq is not.
+
+    x* = (AᵀWA + λI)⁻¹ AᵀW·φ, residual = W^½·(φ − A x*), returns mean square.
+
+    Falls back to a zero scalar if the final value is still non-finite — a
+    safety belt so one bad batch cannot poison the whole training run.
+    """
+    if coh_weights is None:
+        coh_weights = torch.ones_like(phi_hat)
+    # (P,) per-pair weight from mean coherence; clamp to avoid 0-weight sqrt
+    W_diag = coh_weights.mean(dim=1).clamp(min=1e-6)
+    W_sqrt = W_diag.sqrt().unsqueeze(1)               # (P, 1)
+    Aw     = A * W_sqrt                               # (P, T)
+    phi_w  = phi_hat * W_sqrt                         # (P, N)
+    T_cols = Aw.shape[1]
+    # x* = (AwᵀAw + λI)⁻¹ Awᵀ phi_w  (solve, not lstsq → bounded in null space)
+    AtA    = Aw.T @ Aw + lambda_reg * torch.eye(
+        T_cols, device=Aw.device, dtype=Aw.dtype)
+    AtPhi  = Aw.T @ phi_w                             # (T, N)
+    x_star = torch.linalg.solve(AtA, AtPhi)           # (T, N)
+    residual = phi_w - Aw @ x_star                    # (P, N)
+    loss = (residual ** 2).mean()
+    if not torch.isfinite(loss):
+        return torch.zeros((), device=phi_hat.device, dtype=phi_hat.dtype,
+                           requires_grad=True)
+    return loss
+
+
+# Install the stable version in place of the published one. `InSARLoss.forward`
+# looks `temporal_consistency_loss` up on the module at call time, so patching
+# the attribute here is enough — no need to subclass InSARLoss.
+_physics_losses.temporal_consistency_loss = _stable_temporal_consistency_loss
 
 logging.basicConfig(
     level=logging.INFO,
@@ -824,19 +874,19 @@ def main() -> None:
     # The maps are stable across the sweep and are persisted to disk below.
     pair_id_map: Dict[str, Tuple[str, str]] = {}
     unresolved_dirs: List[str] = []
-    for pd in pair_dirs:
-        meta_file = pd / "coreg_meta.json"
+    for pdir in pair_dirs:
+        meta_file = pdir / "coreg_meta.json"
         try:
             with open(meta_file) as f:
                 m = json.load(f)
             id_ref = str(m.get("id_ref", "")).strip()
             id_sec = str(m.get("id_sec", "")).strip()
             if id_ref and id_sec:
-                pair_id_map[pd.name] = (id_ref, id_sec)
+                pair_id_map[pdir.name] = (id_ref, id_sec)
             else:
-                unresolved_dirs.append(pd.name)
+                unresolved_dirs.append(pdir.name)
         except Exception:
-            unresolved_dirs.append(pd.name)
+            unresolved_dirs.append(pdir.name)
     all_ids: set = set()
     for id_ref, id_sec in pair_id_map.values():
         all_ids.update([id_ref, id_sec])
