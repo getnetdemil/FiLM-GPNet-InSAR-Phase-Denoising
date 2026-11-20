@@ -1031,6 +1031,12 @@ In order of impact for this workload:
   submits can start weeks earlier because of backfill.**
 - Over-constrained features (`cpu_skylake` only) → missed Milan nodes
   with huge free RAM. **Use OR expressions for the safe superset.**
+- Set `--time=02:00:00` based on the *average* pair runtime. A few
+  outlier "hard" pairs (low coherence, big network) take 2–4 h in
+  SNAPHU's second pass and got silently killed at exactly 2 h —
+  SLURM marks them COMPLETED exit 0 and no output is written. Fix:
+  pick `--time` based on the **p95 or max** observed runtime, not the
+  average. For the last few stragglers, resubmit with a longer `--time`.
 
 ---
 
